@@ -152,6 +152,56 @@ h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
 .stat-link{display:inline-block;margin-top:10px;font-size:14px;font-weight:600;color:var(--blue);border-bottom:1px solid transparent;transition:.2s}
 .stat-link:hover{border-bottom-color:var(--blue)}
 
+
+/* results: the crystal and its spec callouts */
+#results{background:radial-gradient(ellipse at 50% 0%,#12203f 0%,#06080e 62%);color:#f1f6ff}
+#results .eyebrow{color:#8fbaff}
+#results h2{color:#f1f6ff}
+#results h2 .accent{color:#8fbaff}
+#results .lede{color:#9db2d3}
+.rstage{position:relative;height:600px;margin-top:30px}
+.rcrystal{position:absolute;left:50%;top:50%;width:380px;height:380px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 30px rgba(110,160,255,.5));overflow:visible}
+.rlines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.callout{position:absolute;width:min(310px,29%)}
+.callout.tl{left:0;top:4%}.callout.bl{left:0;bottom:4%}
+.callout.tr{right:0;top:4%;text-align:right}.callout.br{right:0;bottom:4%;text-align:right}
+.callout .n{font-size:clamp(42px,4.8vw,72px);font-weight:700;letter-spacing:-.05em;line-height:1;color:#f1f6ff}
+.callout .n em{font-style:normal;color:#8fbaff}
+.callout p{margin-top:10px;color:#9db2d3;font-size:15px;line-height:1.5}
+.callout .stat-link{color:#8fbaff}
+.callout .stat-link:hover{border-bottom-color:#8fbaff}
+#results .foot{color:#9db2d3}
+#results .regions span.k{color:#9db2d3}
+#results .regions span.r{background:rgba(143,186,255,.08);border-color:rgba(160,190,255,.3);color:#e4edff}
+#results .regions span.r:hover{border-color:#8fbaff;color:#8fbaff}
+@media(max-width:860px){
+  .rstage{height:auto;display:flex;flex-direction:column;align-items:center}
+  .rcrystal{position:relative;left:auto;top:auto;transform:none;width:250px;height:250px}
+  .rlines{display:none}
+  .callout,.callout.tl,.callout.bl,.callout.tr,.callout.br{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:100%;text-align:left;margin-top:24px;padding-top:18px;border-top:1px solid rgba(160,190,255,.22)}
+}
+
+/* projects: constellation strip */
+.cons{position:relative;margin-top:44px;border-radius:28px;padding:22px 18px 20px;background:radial-gradient(ellipse at 50% 0%,#12203f 0%,#06080e 70%);overflow:hidden}
+.cons-cap{position:relative;z-index:1;text-align:center;font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.12em;color:#9db2d3;text-transform:uppercase;margin-bottom:6px}
+.cons-line{position:absolute;left:6%;right:6%;top:104px;height:1px;background:linear-gradient(90deg,transparent,rgba(143,186,255,.55) 15%,rgba(143,186,255,.55) 85%,transparent)}
+.cons-row{position:relative;z-index:1;display:flex;gap:6px;justify-content:space-between;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
+.cnode{flex:1 0 112px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;color:#eaf1ff;padding:6px 4px 10px;border-radius:16px;transition:background .25s,transform .25s;text-align:center}
+.cnode:hover,.cnode:focus-visible{background:rgba(143,186,255,.12);transform:translateY(-3px);outline:none}
+.cnode svg{width:76px;height:76px;overflow:visible;filter:drop-shadow(0 0 12px rgba(110,160,255,.5))}
+.cnode b{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.cnode small{font-size:12px;color:#9db2d3;line-height:1.3}
+.cnode.personal small{color:#c9b8ff}
+
+/* closing scene */
+#contact{background:radial-gradient(ellipse at 50% 18%,#17264a 0%,#06080e 66%);color:#f1f6ff;position:relative;overflow:hidden}
+#contact h2{color:#f1f6ff}
+#contact h2 .accent,#contact .accent{color:#8fbaff}
+.ccrystal{display:block;width:190px;height:190px;margin:0 auto 26px;overflow:visible;filter:drop-shadow(0 0 42px rgba(190,220,255,.85))}
+#contact .btn.primary{background:#fff;color:#0b0b0f;box-shadow:none}
+#contact .btn.ghost{border-color:rgba(255,255,255,.5);color:#fff}
+#contact .btn.ghost:hover{background:#fff;color:#0b0b0f}
+
 /* network hero */
 #hero{position:relative;height:440vh;background:#05070b;color:#f1f6ff}
 #hero .net-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
@@ -419,6 +469,7 @@ footer nav{display:flex;gap:22px}
     <p class="eyebrow">Projects</p>
     <h2 class="big" data-rise>Projects that <span class="accent">prove the approach.</span></h2>
     <p class="lede" data-rise>Five client projects across FinTech, AI automation, TravelTech, FoodTech and education, plus two personal projects. Open any card for the decision story and the tech stack.</p>
+    <div class="cons" id="cons" data-rise><p class="cons-cap">7 projects &middot; open any crystal for its decision story</p><div class="cons-line"></div><div class="cons-row" id="consRow"></div></div>
     <div class="grid" id="grid"></div>
   </div>
 </section>
@@ -453,11 +504,14 @@ footer nav{display:flex;gap:22px}
   <div class="wrap">
     <p class="eyebrow">Results</p>
     <h2 class="big" data-rise>Numbers that <span class="accent">survive</span> an interview.</h2>
-    <div class="stats">
-      <div class="stat" data-rise><div class="n"><span data-count="800">800</span><em>+</em></div><p>Colleges whose data and logins the MU Ideas website manages</p><a class="stat-link" href="#projects" data-p="muideas">MU Ideas story &rarr;</a></div>
-      <div class="stat" data-rise><div class="n"><span data-count="5000">5,000</span><em>+</em></div><p>Active users on JennaHQ during my time, on a structure built to scale to 100,000</p><a class="stat-link" href="#projects" data-p="jennahq">JennaHQ story &rarr;</a></div>
-      <div class="stat" data-rise><div class="n">4&ndash;5<em> sec</em></div><p>JennaHQ AI response time with memory and context, down from about 15 seconds</p><a class="stat-link" href="#projects" data-p="jennahq">JennaHQ story &rarr;</a></div>
-      <div class="stat" data-rise><div class="n">~<span data-count="1">1</span><em>%</em></div><p>Missed leads after sales automation, down from 16&ndash;21% (400&ndash;600 leads a week)</p><a class="stat-link" href="#projects" data-p="aisales">AI Sales Automation story &rarr;</a></div>
+    <p class="lede" data-rise>Each number comes from one project. Open the story behind it.</p>
+    <div class="rstage" id="rstage" data-rise>
+      <svg class="rlines" id="rLines" aria-hidden="true"></svg>
+      <svg class="rcrystal" id="rCrystal" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+      <div class="callout tl"><div class="n">4&ndash;5<em> sec</em></div><p>JennaHQ AI response time with memory and context, down from about 15 seconds</p><a class="stat-link" href="#projects" data-p="jennahq">JennaHQ story &rarr;</a></div>
+      <div class="callout bl"><div class="n"><span data-count="5000">5,000</span><em>+</em></div><p>Active users on JennaHQ during my time, on a structure built to scale to 100,000</p><a class="stat-link" href="#projects" data-p="jennahq">JennaHQ story &rarr;</a></div>
+      <div class="callout tr"><div class="n">~<span data-count="1">1</span><em>%</em></div><p>Missed leads after sales automation, down from 16&ndash;21% (400&ndash;600 leads a week)</p><a class="stat-link" href="#projects" data-p="aisales">AI Sales Automation story &rarr;</a></div>
+      <div class="callout br"><div class="n"><span data-count="800">800</span><em>+</em></div><p>Colleges whose data and logins the MU Ideas website manages</p><a class="stat-link" href="#projects" data-p="muideas">MU Ideas story &rarr;</a></div>
     </div>
     <p class="foot" data-rise>These figures describe the platform or the process, as reported during delivery. They are not personal sales or revenue numbers.</p>
     <div class="regions" data-rise>
@@ -507,6 +561,7 @@ footer nav{display:flex;gap:22px}
 
 <section class="close-sec" id="contact">
   <div class="wrap">
+    <svg class="ccrystal" id="cCrystal" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
     <h2 data-rise>Great projects aren't delivered by accident. They're delivered through <span class="accent">better decisions.</span></h2>
     <div class="btns" data-rise>
       <a class="btn primary mag" href="mailto:prempatil140398@gmail.com">Let's talk <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -764,6 +819,100 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
 
 
 </script>
+
+<script>
+/* ---------- light crystals (SVG, no WebGL): results, project strip, closing scene ---------- */
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phi=(1+Math.sqrt(5))/2,NS='http://www.w3.org/2000/svg';
+  var V=[[-1,phi,0],[1,phi,0],[-1,-phi,0],[1,-phi,0],[0,-1,phi],[0,1,phi],[0,-1,-phi],[0,1,-phi],[phi,0,-1],[phi,0,1],[-phi,0,-1],[-phi,0,1]].map(function(v){var l=Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);return [v[0]/l,v[1]/l,v[2]/l]});
+  var F=[[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
+  var E=[],seen={};F.forEach(function(f){for(var i=0;i<3;i++){var a=f[i],b=f[(i+1)%3],k=a<b?a+'-'+b:b+'-'+a;if(!seen[k]){seen[k]=1;E.push([a,b])}}});
+  function el(n,at){var e=document.createElementNS(NS,n);for(var k in at)e.setAttribute(k,at[k]);return e}
+  var list=[];
+  function Crystal(svg,o){
+    o=o||{};this.svg=svg;this.R=o.R||66;this.speed=o.speed||0.35;this.phase=o.phase||0;this.col=o.col||[143,186,255];this.lit=!!o.lit;this.visible=false;
+    var c=this.col,cs='rgb('+c[0]+','+c[1]+','+c[2]+')';
+    var g=el('g',{});svg.appendChild(g);
+    if(this.lit){var id='cg'+Math.floor(Math.random()*1e6);var d=el('defs',{});var rg=el('radialGradient',{id:id});rg.appendChild(el('stop',{offset:'0','stop-color':'#ffffff','stop-opacity':'.95'}));rg.appendChild(el('stop',{offset:'1','stop-color':cs,'stop-opacity':'0'}));d.appendChild(rg);svg.insertBefore(d,g);this.core=el('circle',{r:50,fill:'url(#'+id+')'});g.appendChild(this.core)}
+    this.faces=F.map(function(){var p=el('polygon',{fill:cs,'fill-opacity':0,stroke:'none'});g.appendChild(p);return p});
+    this.edges=E.map(function(){var l=el('line',{stroke:cs,'stroke-width':1,'stroke-linecap':'round'});g.appendChild(l);return l});
+    this.dots=V.map(function(){var d=el('circle',{r:1.6,fill:'#fff'});g.appendChild(d);return d});
+    this.proj=V.map(function(){return {x:0,y:0,z:0}});
+    list.push(this);
+    var self=this;
+    if('IntersectionObserver' in window){new IntersectionObserver(function(en){self.visible=en[0].isIntersecting}).observe(svg)}else this.visible=true;
+  }
+  Crystal.prototype.update=function(t){
+    var a=t*this.speed+this.phase,ca=Math.cos(a),sa=Math.sin(a),tx=0.5+0.14*Math.sin(t*0.4+this.phase),cx=Math.cos(tx),sx=Math.sin(tx),R=this.R,P=this.proj;
+    for(var i=0;i<V.length;i++){
+      var v=V[i],x=v[0]*ca+v[2]*sa,z=-v[0]*sa+v[2]*ca,y=v[1];
+      var y2=y*cx-z*sx,z2=y*sx+z*cx,s=1/(1-z2*0.16);
+      P[i].x=x*R*s;P[i].y=-y2*R*s;P[i].z=z2;
+    }
+    var pulse=this.lit?0.85+0.15*Math.sin(t*1.6):1;
+    for(var f=0;f<F.length;f++){
+      var A=P[F[f][0]],B=P[F[f][1]],C=P[F[f][2]],nz=(A.z+B.z+C.z)/3;
+      this.faces[f].setAttribute('points',A.x.toFixed(1)+','+A.y.toFixed(1)+' '+B.x.toFixed(1)+','+B.y.toFixed(1)+' '+C.x.toFixed(1)+','+C.y.toFixed(1));
+      this.faces[f].setAttribute('fill-opacity',((0.04+0.2*Math.max(0,nz))*pulse).toFixed(3));
+    }
+    for(var e=0;e<E.length;e++){
+      var p1=P[E[e][0]],p2=P[E[e][1]],zz=((p1.z+p2.z)/2+1)/2,l=this.edges[e];
+      l.setAttribute('x1',p1.x.toFixed(1));l.setAttribute('y1',p1.y.toFixed(1));l.setAttribute('x2',p2.x.toFixed(1));l.setAttribute('y2',p2.y.toFixed(1));
+      l.setAttribute('stroke-opacity',((0.18+0.7*zz)*pulse).toFixed(3));
+    }
+    for(var d=0;d<V.length;d++){var q=P[d],zq=(q.z+1)/2;this.dots[d].setAttribute('cx',q.x.toFixed(1));this.dots[d].setAttribute('cy',q.y.toFixed(1));this.dots[d].setAttribute('r',(1+1.6*zq).toFixed(2));this.dots[d].setAttribute('fill-opacity',(0.35+0.65*zq).toFixed(2))}
+    if(this.core){this.core.setAttribute('r',(46+8*Math.sin(t*1.6))*(this.R/66))}
+  };
+
+  /* results crystal + leader lines */
+  var rs=document.getElementById('rCrystal'),stage=document.getElementById('rstage'),rl=document.getElementById('rLines'),rc=rs?new Crystal(rs,{R:70,speed:0.3}):null;
+  var callouts=stage?[].slice.call(stage.querySelectorAll('.callout')):[],lines=[];
+  if(rl){callouts.forEach(function(){var p=el('path',{fill:'none',stroke:'rgba(143,186,255,.55)','stroke-width':1});var c=el('circle',{r:3,fill:'#8fbaff'});rl.appendChild(p);rl.appendChild(c);lines.push([p,c])})}
+  var pick=[function(P){return best(P,function(v){return -(v.x+v.y)})},function(P){return best(P,function(v){return -(v.x-v.y)})},function(P){return best(P,function(v){return v.x-v.y})},function(P){return best(P,function(v){return v.x+v.y})}];
+  function best(P,f){var bi=0,bs=-1e9;for(var i=0;i<P.length;i++){var sc=f(P[i]);if(sc>bs){bs=sc;bi=i}}return P[bi]}
+  function leaders(){
+    if(!rc||!rc.visible||window.innerWidth<=860)return;
+    var sr=stage.getBoundingClientRect(),cr=rs.getBoundingClientRect(),k=cr.width/200,cx=cr.left-sr.left+cr.width/2,cy=cr.top-sr.top+cr.height/2;
+    callouts.forEach(function(c,i){
+      var b=c.getBoundingClientRect(),right=c.classList.contains('tr')||c.classList.contains('br');
+      var ax=right?b.left-sr.left-12:b.right-sr.left+12,ay=b.top-sr.top+30;
+      var v=pick[i](rc.proj),vx=cx+v.x*k,vy=cy+v.y*k,mx=right?ax+(vx-ax)*0.35:ax+(vx-ax)*0.35;
+      lines[i][0].setAttribute('d','M'+ax+' '+ay+' L'+mx.toFixed(1)+' '+ay+' L'+vx.toFixed(1)+' '+vy.toFixed(1));
+      lines[i][1].setAttribute('cx',vx.toFixed(1));lines[i][1].setAttribute('cy',vy.toFixed(1));
+    });
+  }
+
+  /* closing-scene crystal */
+  var cs=document.getElementById('cCrystal');if(cs)new Crystal(cs,{R:72,speed:0.22,lit:true,col:[200,225,255]});
+
+  /* project strip */
+  var row=document.getElementById('consRow');
+  if(row&&window.PROJECTS){
+    PROJECTS.forEach(function(pr,i){
+      var b=document.createElement('button');b.className='cnode'+(pr.id==='hermes'||pr.id==='medlens'?' personal':'');b.setAttribute('aria-label','Open '+pr.title+' case study');
+      var sv=document.createElementNS(NS,'svg');sv.setAttribute('viewBox','-100 -100 200 200');sv.setAttribute('aria-hidden','true');
+      b.appendChild(sv);
+      var t=document.createElement('b');t.textContent=pr.title;b.appendChild(t);
+      var sm=document.createElement('small');sm.textContent=(pr.tag||'').split('·')[0].trim();b.appendChild(sm);
+      b.addEventListener('click',function(){openProject(pr)});
+      row.appendChild(b);
+      new Crystal(sv,{R:64,speed:0.45,phase:i*0.9,col:pr.id==='hermes'||pr.id==='medlens'?[200,175,255]:[143,186,255]});
+    });
+  }
+
+  /* one shared loop; only crystals on screen are drawn */
+  function loop(ms){
+    var t=ms/1000;
+    for(var i=0;i<list.length;i++)if(list[i].visible)list[i].update(t);
+    leaders();
+    requestAnimationFrame(loop);
+  }
+  list.forEach(function(c){c.update(0)});
+  if(reduce){list.forEach(function(c){c.visible=true;c.update(1.2)});leaders()}else requestAnimationFrame(loop);
+  window.addEventListener('resize',leaders);
+})();
+</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">var heroEl=document.getElementById('hero');
 
@@ -772,6 +921,8 @@ import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+var hasGL=(function(){try{var c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'))}catch(e){return false}})();
+if(!hasGL){document.getElementById('netNogl').style.display='grid';heroEl.classList.add('static')}else{(function(){
 
 var canvas=document.getElementById('netC');
 var small=innerWidth<700, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1079,6 +1230,7 @@ function frame(){
 }
 frame();
 if(staticMode){setTimeout(frame,200);curStage=-1}
+})()}
 </script>
 </body>
 </html>
