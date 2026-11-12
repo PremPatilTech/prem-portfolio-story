@@ -202,6 +202,31 @@ h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
 #contact .btn.ghost{border-color:rgba(255,255,255,.5);color:#fff}
 #contact .btn.ghost:hover{background:#fff;color:#0b0b0f}
 
+
+/* loading intro */
+#ld{position:fixed;inset:0;background:#05070b;color:#f1f6ff;z-index:100000;display:grid;place-items:center;overflow:hidden;animation:ldFail .01s 7s forwards}
+@keyframes ldFail{to{visibility:hidden;pointer-events:none}}
+#ld .ldn{position:absolute;left:clamp(20px,4vw,48px);top:clamp(20px,4vh,40px);font:700 18px Inter,sans-serif;letter-spacing:-.01em}
+#ld .ldw{font:700 clamp(52px,10vw,150px)/1 Inter,sans-serif;letter-spacing:-.04em;white-space:nowrap}
+#ld .ldc{position:absolute;left:clamp(20px,4vw,48px);bottom:clamp(24px,5vh,48px);font:500 clamp(28px,4vw,56px) 'DM Mono',monospace;color:#8fbaff}
+#ld .ldb{position:absolute;left:0;bottom:0;height:3px;width:0;background:#8fbaff}
+html.ld-lock,html.ld-lock body{overflow:hidden}
+
+/* sheets: a section slides over the one before it */
+#about,#results{position:relative;z-index:3;border-radius:34px 34px 0 0;margin-top:-34px;box-shadow:0 -26px 60px -30px rgba(0,0,0,.5)}
+#about{background:var(--bg)}
+
+/* project thread */
+.grid{position:relative}
+.thr{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.grid .card{z-index:1}
+.card.th-on{border-color:var(--blue);box-shadow:0 24px 50px -30px rgba(37,99,235,.55)}
+@media(max-width:899px){.thr{display:none}}
+
+/* closing statement fills as you scroll */
+#contact h2 .w{display:inline-block;white-space:pre;color:color-mix(in srgb,#f1f6ff calc(var(--t,1)*100%),#2b3756)}
+#contact h2 .accent .w{color:color-mix(in srgb,#8fbaff calc(var(--t,1)*100%),#27365a)}
+
 /* network hero */
 #hero{position:relative;height:440vh;background:#05070b;color:#f1f6ff}
 #hero .net-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
@@ -442,6 +467,7 @@ footer nav{display:flex;gap:22px}
 </style>
 </head>
 <body>
+<div id="ld" aria-hidden="true"><span class="ldn">Prem Patil</span><div class="ldw" id="ldw">Project</div><div class="ldc" id="ldc">00</div><div class="ldb" id="ldb"></div></div>
 
 <nav class="nav hero-on" id="nav" aria-label="Main">
   <a class="logo" href="#hero">Prem Patil</a>
@@ -813,7 +839,7 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
   // process line fills as you scroll, steps rise
   (function(){var bar=document.querySelector('#steps .bar'),sts=[].slice.call(document.querySelectorAll('#steps .step'));
     ScrollTrigger.create({trigger:'#steps',start:'top 80%',end:'top 40%',scrub:true,onUpdate:function(self){bar.style.transform='scaleX('+self.progress+')';sts.forEach(function(el,i){el.classList.toggle('on',self.progress>=i/4-0.001)})}});})();
-  gsap.from('.step',{y:50,opacity:0,duration:.8,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'#steps',start:'top 88%',once:true}});
+  gsap.from('.step',{opacity:0,duration:.6,stagger:.08,ease:'power2.out',clearProps:'opacity,transform',scrollTrigger:{trigger:'#steps',start:'top 88%',once:true}});
 
   // generic rise-in
   ScrollTrigger.batch('[data-rise]',{start:'top 90%',once:true,onEnter:function(b){gsap.from(b,{y:46,opacity:0,duration:.85,ease:'power3.out',stagger:.12,clearProps:'transform,opacity'})}});
@@ -998,6 +1024,72 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
       el.style.transform='translateX('+x.toFixed(1)+'px) skewX('+(-vel*0.22).toFixed(2)+'deg)'}
     requestAnimationFrame(loop);
   })();
+})();
+</script>
+<script>
+(function(){
+  var ld=document.getElementById('ld');if(!ld)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,seen=false;
+  try{seen=sessionStorage.getItem('ldSeen')==='1'}catch(e){}
+  if(reduce||seen||!window.gsap){ld.remove();return}
+  var root=document.documentElement;root.classList.add('ld-lock');
+  var steps=[['Project','Inter,sans-serif',700,'normal'],['Technical','"Instrument Serif",serif',400,'italic'],['AI','"DM Mono",monospace',500,'normal'],['Delivery','Inter,sans-serif',700,'normal'],['Manager','"Instrument Serif",serif',400,'italic'],['Prem Patil','Inter,sans-serif',700,'normal']];
+  var w=document.getElementById('ldw'),c=document.getElementById('ldc'),b=document.getElementById('ldb'),o={v:0},i=0;
+  function done(){try{sessionStorage.setItem('ldSeen','1')}catch(e){}ld.remove();root.classList.remove('ld-lock');if(window.ScrollTrigger)ScrollTrigger.refresh()}
+  gsap.timeline({onComplete:done})
+    .to(o,{v:100,duration:2.3,ease:'power2.inOut',onUpdate:function(){
+      c.textContent=String(Math.round(o.v)).padStart(2,'0');b.style.width=o.v+'%';
+      var idx=Math.min(steps.length-1,Math.floor(o.v/100*steps.length));
+      if(idx!==i){i=idx;var s=steps[i];w.style.fontFamily=s[1];w.style.fontWeight=s[2];w.style.fontStyle=s[3];w.textContent=s[0];gsap.fromTo(w,{y:22,opacity:0},{y:0,opacity:1,duration:.25,ease:'power3.out'})}
+    }})
+    .to(ld,{yPercent:-100,duration:.85,ease:'power4.inOut'},'+=0.15');
+})();
+
+(function(){
+  if(!window.gsap||!window.ScrollTrigger||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  /* the section before a sheet sinks back as the next one comes over it */
+  function sink(sel,trig,start,end){var el=document.querySelector(sel);if(!el)return;gsap.to(el,{scale:0.94,opacity:0.5,transformOrigin:'50% 100%',ease:'none',scrollTrigger:{trigger:trig,start:start,end:end,scrub:true}})}
+  sink('#artifacts .wrap','#results','top bottom','top 25%');
+  sink('#results .wrap','#journey','top bottom','top top');
+
+  /* a thread through the project cards */
+  var grid=document.getElementById('grid');
+  if(grid&&window.matchMedia('(min-width:900px)').matches){
+    var NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');svg.setAttribute('class','thr');svg.setAttribute('aria-hidden','true');
+    var base=document.createElementNS(NS,'path'),p1=document.createElementNS(NS,'path'),p2=document.createElementNS(NS,'path'),dot=document.createElementNS(NS,'circle'),halo=document.createElementNS(NS,'circle');
+    [[base,'#e6e8ee',2],[p2,'#9db8ff',1.4],[p1,'#2563eb',2.6]].forEach(function(a){a[0].setAttribute('fill','none');a[0].setAttribute('stroke',a[1]);a[0].setAttribute('stroke-width',a[2]);a[0].setAttribute('stroke-linecap','round')});
+    dot.setAttribute('r',7);dot.setAttribute('fill','#2563eb');halo.setAttribute('r',16);halo.setAttribute('fill','#2563eb');halo.setAttribute('opacity','.15');
+    [base,p2,p1,halo,dot].forEach(function(e){svg.appendChild(e)});grid.insertBefore(svg,grid.firstChild);
+    var cards=[].slice.call(grid.querySelectorAll('.card')),len=0,pts=[];
+    function curve(a,off){var d='M'+(a[0].x+off)+' '+a[0].y;for(var i=0;i<a.length-1;i++){var u=a[i],v=a[i+1],my=(u.y+v.y)/2;d+=' C'+(u.x+off)+' '+my+' '+(v.x+off)+' '+my+' '+(v.x+off)+' '+v.y}return d}
+    function layout(){
+      pts=cards.map(function(c){return {x:c.offsetLeft+c.offsetWidth/2,y:c.offsetTop+c.offsetHeight*0.18}});
+      if(pts.length<2)return;
+      var d=curve(pts,0);base.setAttribute('d',d);p1.setAttribute('d',d);p2.setAttribute('d',curve(pts,10));
+      len=p1.getTotalLength();p1.style.strokeDasharray=len;p2.style.strokeDasharray=p2.getTotalLength();
+    }
+    layout();window.addEventListener('resize',layout);ScrollTrigger.addEventListener('refresh',layout);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layout);
+    ScrollTrigger.create({trigger:grid,start:'top 65%',end:'bottom 70%',scrub:0.5,onUpdate:function(sc){
+      if(!len)return;var pr=sc.progress;p1.style.strokeDashoffset=len*(1-pr);var l2=p2.getTotalLength();p2.style.strokeDashoffset=l2*(1-Math.max(0,pr-0.03));
+      var pt=p1.getPointAtLength(len*pr);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);halo.setAttribute('cx',pt.x);halo.setAttribute('cy',pt.y);
+      cards.forEach(function(c,i){c.classList.toggle('th-on',pr>0.001&&pt.y>=pts[i].y-12)});
+    }});
+  }
+
+  /* the closing statement fills word by word while the screen holds */
+  var h=document.querySelector('#contact h2');
+  if(h){
+    var out=[];
+    h.childNodes.forEach(function(n){var acc=n.nodeType===1&&n.classList&&n.classList.contains('accent');var words=n.textContent.split(/(\s+)/);var html=words.map(function(t){if(!t)return '';if(/^\s+$/.test(t))return '<span class="w" data-sp> </span>';return '<span class="w" data-w>'+t+'</span>'}).join('');out.push(acc?'<span class="accent">'+html+'</span>':html)});
+    h.innerHTML=out.join('');
+    var ws=[].slice.call(h.querySelectorAll('[data-w]')),n=ws.length;
+    ws.forEach(function(w){w.style.setProperty('--t','0')});
+    ScrollTrigger.create({trigger:'#contact .wrap',start:'center center',end:'+=130%',pin:true,scrub:true,onUpdate:function(sc){
+      var pr=Math.min(1,sc.progress/0.75);
+      ws.forEach(function(w,i){var a=i/n,b=(i+1)/n,t=Math.max(0,Math.min(1,(pr-a)/(b-a+0.12)));w.style.setProperty('--t',t.toFixed(3))});
+    }});
+  }
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
