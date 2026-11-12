@@ -148,6 +148,10 @@ h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
 @media(max-width:520px){.cadence{grid-template-columns:1fr}}
 
 
+/* result links */
+.stat-link{display:inline-block;margin-top:10px;font-size:14px;font-weight:600;color:var(--blue);border-bottom:1px solid transparent;transition:.2s}
+.stat-link:hover{border-bottom-color:var(--blue)}
+
 /* network hero */
 #hero{position:relative;height:440vh;background:#05070b;color:#f1f6ff}
 #hero .net-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
@@ -167,7 +171,7 @@ h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
 #hero .proof.on{opacity:1;pointer-events:auto}
 #hero h1{font-family:Inter,sans-serif;font-weight:700;font-size:clamp(32px,4.8vw,68px);letter-spacing:-.04em;line-height:1.02;margin:0;max-width:none}
 #hero h1 em{font-style:normal;color:#8fbaff}
-#hero .proof p{margin-top:18px;font-size:clamp(13px,1.3vw,16px);letter-spacing:.06em;color:#9db2d3;line-height:1.8}
+#hero .proof p{margin:18px auto 0;max-width:640px;font-family:Inter,sans-serif;font-size:clamp(16px,1.5vw,20px);color:#b7c7e2;line-height:1.55}
 #hero .proof .btns{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap}
 #hero .btn.ghost{border-color:rgba(255,255,255,.5);color:#fff}
 #hero .btn.ghost:hover{background:#fff;color:#0b0b0f;border-color:#fff}
@@ -189,7 +193,8 @@ h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
 #hero .hint{position:absolute;left:clamp(18px,4vw,48px);bottom:20px;font-size:12px;letter-spacing:.16em;color:#9db2d3;transition:opacity .5s}
 #hero .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:7}
 #hero .nogl{display:none;position:absolute;inset:0;z-index:6;place-items:center;text-align:center;padding:30px;color:#9db2d3;background:#05070b}
-#hero .nogl h1{color:#f1f6ff}
+#hero .nogl h2{color:#f1f6ff;font-size:clamp(32px,4.8vw,68px);letter-spacing:-.04em;line-height:1.02;font-family:Inter,sans-serif;font-weight:700}
+#hero .nogl h2 em{font-style:normal;color:#8fbaff}
 #hero .nogl p{max-width:620px;margin:18px auto 0;font-family:Inter,sans-serif}
 #hero .nogl .btns{display:flex;gap:12px;justify-content:center;margin-top:22px}
 #hero.static{height:100vh;height:100svh}
@@ -321,7 +326,7 @@ dialog::backdrop{background:rgba(8,10,18,.55);backdrop-filter:blur(6px)}
 .ti svg{width:16px;height:16px}
 .ti.full{border:0;background:none}
 .ti.full svg{width:26px;height:26px}
-.tool small{display:block;font-size:10.5px;color:var(--mute);font-weight:500;line-height:1.1}
+.tool small{display:block;font-size:11.5px;color:var(--mute);font-weight:500;line-height:1.1}
 @media(max-width:1000px){.phases{grid-template-columns:1fr 1fr}.toolgroups{grid-template-columns:1fr}}
 @media(max-width:560px){.phases{grid-template-columns:1fr}}
 
@@ -367,7 +372,7 @@ footer nav{display:flex;gap:22px}
       <div class="cap" id="netCap" aria-live="polite"><small id="netNum">01 / 07</small><p id="netText">Unstructured inputs. Scattered stakeholders.</p></div>
       <div class="proof" id="netProof">
         <h1>Prem Patil, <em>Project Manager</em></h1>
-        <p>5,000+ ACTIVE USERS &middot; AI RESPONSE 15 s &rarr; 4&ndash;5 s &middot; MISSED LEADS 16&ndash;21% &rarr; ~1%</p>
+        <p>I manage AI and software projects for clients in North America, the Middle East and India.</p>
         <div class="btns"><a class="btn primary" href="#projects">View projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="#contact">Let&rsquo;s talk</a></div>
       </div>
       <div class="bar"><i id="netBar"></i></div>
@@ -375,7 +380,7 @@ footer nav{display:flex;gap:22px}
       <div class="hint" id="netHint">SCROLL TO FOLLOW THE PROJECT</div>
     </div>
     <div class="flash" id="netFlash"></div>
-    <div class="nogl" id="netNogl"><div><h1>Prem Patil, <em>Project Manager</em></h1><p>I manage AI and software projects for clients in North America, the Middle East and India. I find delivery risks early and keep engineering and business teams moving toward one goal: products that actually ship.</p><div class="btns"><a class="btn primary" href="#projects">View projects</a><a class="btn ghost" href="#contact">Let&rsquo;s talk</a></div></div></div>
+    <div class="nogl" id="netNogl"><div><h2>Prem Patil, <em>Project Manager</em></h2><p>I manage AI and software projects for clients in North America, the Middle East and India. I find delivery risks early and keep engineering and business teams moving toward one goal: products that actually ship.</p><div class="btns"><a class="btn primary" href="#projects">View projects</a><a class="btn ghost" href="#contact">Let&rsquo;s talk</a></div></div></div>
   </div>
 </header>
 
@@ -449,10 +454,10 @@ footer nav{display:flex;gap:22px}
     <p class="eyebrow">Results</p>
     <h2 class="big" data-rise>Numbers that <span class="accent">survive</span> an interview.</h2>
     <div class="stats">
-      <div class="stat" data-rise><div class="n"><span data-count="800">800</span><em>+</em></div><p>Colleges whose data and logins the MU Ideas website manages</p></div>
-      <div class="stat" data-rise><div class="n"><span data-count="5000">5,000</span><em>+</em></div><p>Active users on JennaHQ during my time, on a structure built to scale to 100,000</p></div>
-      <div class="stat" data-rise><div class="n">4&ndash;5<em> sec</em></div><p>JennaHQ AI response time with memory and context, down from about 15 seconds</p></div>
-      <div class="stat" data-rise><div class="n">~<span data-count="1">1</span><em>%</em></div><p>Missed leads after sales automation, down from 16&ndash;21% (400&ndash;600 leads a week)</p></div>
+      <div class="stat" data-rise><div class="n"><span data-count="800">800</span><em>+</em></div><p>Colleges whose data and logins the MU Ideas website manages</p><a class="stat-link" href="#projects" data-p="muideas">MU Ideas story &rarr;</a></div>
+      <div class="stat" data-rise><div class="n"><span data-count="5000">5,000</span><em>+</em></div><p>Active users on JennaHQ during my time, on a structure built to scale to 100,000</p><a class="stat-link" href="#projects" data-p="jennahq">JennaHQ story &rarr;</a></div>
+      <div class="stat" data-rise><div class="n">4&ndash;5<em> sec</em></div><p>JennaHQ AI response time with memory and context, down from about 15 seconds</p><a class="stat-link" href="#projects" data-p="jennahq">JennaHQ story &rarr;</a></div>
+      <div class="stat" data-rise><div class="n">~<span data-count="1">1</span><em>%</em></div><p>Missed leads after sales automation, down from 16&ndash;21% (400&ndash;600 leads a week)</p><a class="stat-link" href="#projects" data-p="aisales">AI Sales Automation story &rarr;</a></div>
     </div>
     <p class="foot" data-rise>These figures describe the platform or the process, as reported during delivery. They are not personal sales or revenue numbers.</p>
     <div class="regions" data-rise>
@@ -631,6 +636,7 @@ PROJECTS.forEach(function(p){
   b.addEventListener('click',function(){openProject(p)});
   grid.appendChild(b);
 });
+[].forEach.call(document.querySelectorAll('.stat-link'),function(a){a.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var pr=PROJECTS.filter(function(x){return x.id===a.getAttribute('data-p')})[0];if(pr)openProject(pr)})});
 document.getElementById('phases').innerHTML=PHASES.map(function(p){return '<div class="phase" data-rise><small>Phase '+p[0]+'</small><h4>'+p[1]+'</h4><ul>'+p[2].map(function(i){return '<li>'+i+'</li>'}).join('')+'</ul></div>'}).join('');
 document.getElementById('mgmt').innerHTML=MGMT.map(function(x){return '<span>'+x+'</span>'}).join('');
 document.getElementById('aiskills').innerHTML=AISK.map(function(x){return '<span>'+x+'</span>'}).join('');
@@ -771,7 +777,7 @@ var canvas=document.getElementById('netC');
 var small=innerWidth<700, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var staticMode=small||reduce;
 var renderer;
-try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,powerPreference:'high-performance'})}catch(e){document.getElementById('netNogl').style.display='grid';throw e}
+try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,powerPreference:'high-performance'})}catch(e){document.getElementById('netNogl').style.display='grid';heroEl.classList.add('static');throw e}
 var DPR=Math.min(devicePixelRatio||1,staticMode?1.5:1.75);
 renderer.setPixelRatio(DPR);renderer.setSize(innerWidth,innerHeight,false);
 var scene=new THREE.Scene();scene.background=new THREE.Color(0x05070b);
@@ -972,18 +978,38 @@ addEventListener('pointermove',function(e){mx=(e.clientX/innerWidth-.5);my=(e.cl
 if(staticMode){target=ps=0.99;hint.style.display='none';heroEl.classList.add('static')}
 var v3=new THREE.Vector3(),OV_POS=new THREE.Vector3(185,18,-143),OV_LOOK=new THREE.Vector3(0,30,-143);
 var capOn=true;
-function place(el,wp,dx,dy,op,noCap){
-  v3.copy(wp).project(camera);
-  var inFront=v3.z<1&&Math.abs(v3.x)<1.02&&Math.abs(v3.y)<1.02;
-  var sx=(v3.x*.5+.5)*innerWidth,sy=(-v3.y*.5+.5)*innerHeight;
-  if(!inFront||(!noCap&&capOn&&sx<innerWidth*0.6&&sy>innerHeight*0.58))op=0;
+function proj(wp){v3.copy(wp).project(camera);return {x:(v3.x*.5+.5)*innerWidth,y:(-v3.y*.5+.5)*innerHeight,ok:v3.z<1&&Math.abs(v3.x)<1.1&&Math.abs(v3.y)<1.1}}
+function hit(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
+function circHit(r,c){var nx=Math.max(r.x,Math.min(c.x,r.x+r.w)),ny=Math.max(r.y,Math.min(c.y,r.y+r.h));var dx=c.x-nx,dy=c.y-ny;return dx*dx+dy*dy<c.r*c.r}
+var obst=[],placedR=[],circles=[],capRect={x:0,y:0,w:0,h:0};
+function cands(kind,pr,w,h){
+  if(kind==='node')return [[pr+12,-h-pr*0.2],[pr+12,pr*0.2+4],[-w-pr-12,-h-pr*0.2],[-w-pr-12,pr*0.2+4],[-w/2,-(pr+h+14)],[-w/2,pr+14],[pr+30,-h-pr-40],[-w-pr-30,-h-pr-40]];
+  if(kind==='row')return [[-w/2,-(pr+h+10)],[-w/2,pr+10],[-w/2,-(pr+h+10+h+8)],[-w/2,pr+10+h+8],[-w/2,-(pr+h+10+2*(h+8))],[-w/2,pr+10+2*(h+8)]];
+  if(kind==='mid')return [[10,-h/2],[-w-10,-h/2],[-w/2,14],[-w/2,-h-14],[12,18],[-w-12,18],[12,-h-18],[-w-12,-h-18],[-w/2,40],[-w/2,-h-40]];
+  return [[16,-h-12],[-w-16,-h-12],[16,14],[-w-16,14]];
+}
+function putLabel(el,ax,ay,kind,pr,op,ignoreCap){
+  if(op<0.03){el.style.opacity='0';return}
+  var w=el._w||(el._w=el.offsetWidth||110),h=el._h||(el._h=el.offsetHeight||30),cs=cands(kind,pr,w,h),ok=null;
+  for(var i=0;i<cs.length&&!ok;i++){
+    var rc={x:ax+cs[i][0],y:ay+cs[i][1],w:w,h:h};
+    if(rc.x<8||rc.y<8||rc.x+w>innerWidth-8||rc.y+h>innerHeight-8)continue;
+    var bad=false,k;
+    for(k=0;k<obst.length&&!bad;k++)if(hit(rc,obst[k]))bad=true;
+    if(!bad&&!ignoreCap&&capRect.w&&hit(rc,capRect))bad=true;
+    for(k=0;k<placedR.length&&!bad;k++)if(hit(rc,placedR[k]))bad=true;
+    for(k=0;k<circles.length&&!bad;k++)if(circHit(rc,circles[k]))bad=true;
+    if(!bad)ok=rc;
+  }
+  if(!ok){el.style.opacity='0';return}
+  placedR.push({x:ok.x-4,y:ok.y-4,w:ok.w+8,h:ok.h+8});
   el.style.opacity=op.toFixed(2);
-  var wd=el.offsetWidth||120,x=Math.min(Math.max(sx+dx,10),innerWidth-wd-10),y=Math.min(Math.max(sy+dy,70),innerHeight-60);
-  el.style.transform='translate('+x+'px,'+y+'px)';
+  el.style.transform='translate('+ok.x.toFixed(1)+'px,'+ok.y.toFixed(1)+'px)';
 }
 var mid=new THREE.Vector3();
 var dotsEl=document.getElementById('netDots');dotsEl.innerHTML=MILE.map(function(m,i){return '<i class="'+(i===7?'risk':'')+'" title="'+m[0]+'"></i>'}).join('');var dotNodes=dotsEl.children;
 var fpsT=0,fpsN=0,fpsStage=0;
+var idEl=heroEl.querySelector('.id');idEl.style.transition='opacity .4s';
 function frame(){
   var hr=heroEl.getBoundingClientRect();
   if(!staticMode&&(hr.bottom<-60||hr.top>innerHeight+60)){clock.getDelta();requestAnimationFrame(frame);return}
@@ -991,21 +1017,21 @@ function frame(){
   var dt=Math.min(clock.getDelta(),0.05);
   ps+=(target-ps)*(1-Math.exp(-dt*5));
   var p=ps,sm=THREE.MathUtils.smoothstep;
-  var w=sm(p,0.925,0.945);
+  var w=sm(p,0.93,1.0);
   var u0=Math.min(p*1.08,0.965),tc=u0-(0.1*0.8/(2*Math.PI))*Math.sin(2*Math.PI*(u0-0.05)/0.1);
   U.uP.value=tc;U.uTc.value=tc;U.uTime.value+=dt;U.uHide.value=w;
   U.uFog.value=(0.085-0.06*sm(p,0,0.22))*(1-w)+0.004*w;
   U.uBoost.value=1+w*3;U.uPF.value=0.02*(1-w)+0.0025*w;
   U.uLit.value=p<0.45?-1:Math.min(1.02,(p-0.45)/0.15);
   uDetour.value=sm(p,0.60,0.68);
-  bloom.strength=0.6+0.1*w+1.2*sm(p,0.88,0.935)*(1-sm(p,0.94,0.96));
-  var fl=sm(p,0.895,0.935)*(1-sm(p,0.945,0.985));flashEl.style.opacity=fl.toFixed(3);
+  bloom.strength=0.6+0.1*w+1.2*sm(p,0.88,0.925)*(1-sm(p,0.93,0.95));
+  var fl=sm(p,0.895,0.925)*(1-sm(p,0.93,0.965));flashEl.style.opacity=fl.toFixed(3);
   var c=camPoint(tc-0.03);camera.position.copy(c);
   camera.position.x+=mx*1.4;camera.position.y+=-my*0.9+0.4;
   var look=camPoint(tc+0.012);
   if(w>0){camera.position.lerp(OV_POS,w);look.lerp(OV_LOOK,w)}
   camera.lookAt(look);
-  crystals.forEach(function(cr,i){var nr=1-sm(Math.abs(MILE[i][1]-tc),0.0,0.07);var sc=(0.5+0.85*nr)*(1+w*3.2)*(1+(i===9?1.2*sm(p,0.9,0.935)*(1-sm(p,0.94,0.955)):0));cr.g.scale.setScalar(sc);cr.g.rotation.y=U.uTime.value*0.35+i;cr.g.rotation.x=0.3*Math.sin(U.uTime.value*0.3+i);if(i===7){var wm=sm(tc,0.66,0.74);cr.mat.uniforms.uWarm.value=wm;cr.edges.material.color.setRGB(0.81+0.19*wm,0.89-0.1*wm,1.0-0.8*wm)}});
+  crystals.forEach(function(cr,i){var nr=1-sm(Math.abs(MILE[i][1]-tc),0.0,0.07);var sc=(0.5+0.85*nr*(1-w))*(1+w*3.2)*(1+(i===9?1.2*sm(p,0.9,0.925)*(1-sm(p,0.93,0.945)):0));cr.g.scale.setScalar(sc);cr.g.rotation.y=U.uTime.value*0.35+i;cr.g.rotation.x=0.3*Math.sin(U.uTime.value*0.3+i);if(i===7){var wm=sm(tc,0.66,0.74);cr.mat.uniforms.uWarm.value=wm;cr.edges.material.color.setRGB(0.81+0.19*wm,0.89-0.1*wm,1.0-0.8*wm)}});
   camera.setViewOffset(innerWidth,innerHeight,-innerWidth*0.15*(1-w),innerHeight*0.07*(1-w),innerWidth,innerHeight);
   composer.render();
 
@@ -1018,21 +1044,37 @@ function frame(){
   for(var q=0;q<dotNodes.length;q++){dotNodes[q].classList.toggle('on',Math.abs(MILE[q][1]-tc)<0.05)}
   fpsT+=dt;fpsN++;if(fpsT>3&&!staticMode){var fps=fpsN/fpsT;fpsT=0;fpsN=0;if(fps<38&&fpsStage===0){fpsStage=1;DPR=1;renderer.setPixelRatio(1);composer.setPixelRatio(1);resize()}else if(fps<24&&fpsStage===1){fpsStage=2;staticMode=true;target=ps=0.99}}
   hint.style.opacity=p>0.03?0:1;
+  idEl.style.opacity=p>0.9?0:1;
 
+  /* label layout: no label may touch a crystal, the caption, the nav or another label */
+  var F=innerHeight*0.5/Math.tan(camera.fov*Math.PI/360);
+  obst=[{x:0,y:0,w:innerWidth,h:72},{x:innerWidth-120,y:0,w:120,h:innerHeight},{x:0,y:72,w:380,h:44}];
+  capRect=capOn?{x:0,y:innerHeight*0.56,w:innerWidth*0.62,h:innerHeight*0.44}:{x:0,y:0,w:0,h:0};
+  placedR=[];circles=[];
+  var cs_=[];
   for(var m=0;m<mLabels.length;m++){
-    var np=nodes[mileIdx[m]].p,dt_=Math.abs(MILE[m][1]-tc);
-    var op=(1-sm(dt_,0.04,0.085))*(1-w);
-    if(m===7&&tc<0.5)op*=0.4;
-    var opAll=w>0.5?sm(w,0.5,0.9):0;
-    var dy=w>0.5?(m%2?26:-40):-44,dx=w>0.5?-30:14;
-    place(mLabels[m],np,dx,m===7&&w<=0.5?-100:dy,Math.max(op,opAll),m===7);
+    var np=nodes[mileIdx[m]].p,P=proj(np),dist=camera.position.distanceTo(np);
+    var pr=crystals[m].g.scale.x*F/Math.max(dist,0.5)*1.05;
+    cs_[m]={x:P.x,y:P.y,r:pr,ok:P.ok};
+    if(P.ok&&pr<innerHeight)circles.push({x:P.x,y:P.y,r:pr+5});
   }
   for(var d=0;d<dLabels.length;d++){
     var f=feat[d];mid.copy(f.a).lerp(f.b,0.5);
-    var od=(1-sm(Math.abs(f.t-tc),0.04,0.11))*(1-w)*sm(p,0.14,0.24);
-    place(dLabels[d],mid,-10,-12,od);
+    var od=(1-sm(Math.abs(f.t-tc),0.04,0.11))*(1-sm(w,0,0.12))*sm(p,0.14,0.24),Pm=proj(mid);
+    if(!Pm.ok){dLabels[d].style.opacity='0';continue}
+    putLabel(dLabels[d],Pm.x,Pm.y,'mid',4,od);
   }
-  place(fixLabel,fixPos,16,-34,sm(uDetour.value,0.7,1.0)*(1-w));
+  var order=[];for(m=0;m<mLabels.length;m++)order.push(m);
+  order.sort(function(a,b){return Math.abs(MILE[a][1]-tc)-Math.abs(MILE[b][1]-tc)});
+  order.forEach(function(m){
+    var c=cs_[m],dt_=Math.abs(MILE[m][1]-tc);
+    var op=(1-sm(dt_,0.04,0.085))*(1-sm(w,0,0.2));
+    if(m===7&&tc<0.5)op*=0.4;
+    var ov=sm(w,0.42+m*0.045,0.62+m*0.045);
+    if(!c.ok){mLabels[m].style.opacity='0';return}
+    putLabel(mLabels[m],c.x,c.y,w>0.4?'row':'node',c.r,Math.max(op,ov),m===7);
+  });
+  putLabel(fixLabel,proj(fixPos).x,proj(fixPos).y,'fix',4,sm(uDetour.value,0.7,1.0)*(1-sm(w,0,0.12)),true);
   if(!staticMode)requestAnimationFrame(frame);
 }
 frame();
