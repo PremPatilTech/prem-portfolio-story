@@ -967,7 +967,7 @@ function readScroll(){var r=heroEl.getBoundingClientRect(),max=heroEl.offsetHeig
 addEventListener('scroll',readScroll,{passive:true});readScroll();
 addEventListener('pointermove',function(e){mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});
 if(staticMode){target=ps=0.99;hint.style.display='none';heroEl.classList.add('static')}
-var v3=new THREE.Vector3(),OV_POS=new THREE.Vector3(150,16,-143),OV_LOOK=new THREE.Vector3(0,30,-143);
+var v3=new THREE.Vector3(),OV_POS=new THREE.Vector3(185,18,-143),OV_LOOK=new THREE.Vector3(0,30,-143);
 var capOn=true;
 function place(el,wp,dx,dy,op,noCap){
   v3.copy(wp).project(camera);
