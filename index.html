@@ -276,15 +276,17 @@ h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
 /* how I think */
 .words{font-size:clamp(30px,4.4vw,60px);line-height:1.12;letter-spacing:-.03em;font-weight:700;max-width:1000px}
 .js .words .w{opacity:.14}
-.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:70px;position:relative}
-.steps::before{content:"";position:absolute;left:0;right:0;top:-24px;height:2px;background:var(--line)}
-.steps .bar{position:absolute;left:0;top:-24px;height:2px;width:100%;background:var(--blue);transform-origin:left;transform:scaleX(1)}
+.steps{--sg:14px;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sg);margin-top:90px;position:relative;align-items:stretch}
+.steps::before{content:"";position:absolute;left:calc((100% - 4*var(--sg))/10);right:calc((100% - 4*var(--sg))/10);top:-30px;height:2px;background:var(--line)}
+.steps .bar{position:absolute;left:calc((100% - 4*var(--sg))/10);right:calc((100% - 4*var(--sg))/10);top:-30px;height:2px;background:var(--blue);transform-origin:left center;transform:scaleX(1)}
 .js .steps .bar{transform:scaleX(0)}
-.step{padding:22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:transform .35s,box-shadow .35s,border-color .35s}
+.step{position:relative;display:flex;flex-direction:column;padding:24px 22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:transform .35s,box-shadow .35s,border-color .35s}
+.step::before{content:"";position:absolute;left:50%;top:-39px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--bg);border:2px solid var(--line);transition:background .3s,border-color .3s,box-shadow .3s}
+.step.on::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 6px var(--blue-soft)}
 .step:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--blue)}
-.step span{display:block;color:var(--blue);font-weight:700;font-size:14px;margin-bottom:26px}
-.step b{font-size:18px;letter-spacing:-.02em;line-height:1.2;display:block}
-@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+.step span{display:block;color:var(--blue);font-weight:700;font-size:14px;margin-bottom:22px}
+.step b{font-size:18px;letter-spacing:-.02em;line-height:1.25;display:block;min-height:2.5em}
+@media(max-width:900px){.steps{grid-template-columns:1fr;margin-top:40px}.steps::before,.steps .bar,.step::before{display:none}.step b{min-height:0}}
 
 /* projects */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:60px}
@@ -417,6 +419,12 @@ dialog::backdrop{background:rgba(8,10,18,.55);backdrop-filter:blur(6px)}
 #journey.hz .line .fill{left:0;right:auto;top:-2px;bottom:auto;height:2px;width:100%;transform-origin:left center;transform:scaleX(0)}
 #journey.hz .node{flex:0 0 min(500px,36vw);padding:0}
 #journey.hz .node::before{left:0;top:-49px}
+
+
+/* role strip */
+.roleband{background:#05070b;padding:54px 0 14px;overflow:hidden}
+.rb{display:flex;width:max-content;font-size:clamp(64px,11vw,170px);font-weight:700;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:1.5px #3a4c78;white-space:nowrap;will-change:transform}
+.rb b{color:#f1f6ff;-webkit-text-stroke:0;margin:0 .32em}
 
 /* contact */
 .close-sec{text-align:center}
@@ -593,6 +601,8 @@ footer nav{display:flex;gap:22px}
 </section>
 
 
+
+<div class="roleband" id="roleband" aria-hidden="true"><div class="rb" id="rb"></div></div>
 
 <section class="close-sec" id="contact">
   <div class="wrap">
@@ -801,7 +811,8 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
   });
 
   // process line fills as you scroll, steps rise
-  gsap.to('#steps .bar',{scaleX:1,ease:'none',scrollTrigger:{trigger:'#steps',start:'top 85%',end:'bottom 60%',scrub:true}});
+  (function(){var bar=document.querySelector('#steps .bar'),sts=[].slice.call(document.querySelectorAll('#steps .step'));
+    ScrollTrigger.create({trigger:'#steps',start:'top 80%',end:'top 40%',scrub:true,onUpdate:function(self){bar.style.transform='scaleX('+self.progress+')';sts.forEach(function(el,i){el.classList.toggle('on',self.progress>=i/4-0.001)})}});})();
   gsap.from('.step',{y:50,opacity:0,duration:.8,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'#steps',start:'top 88%',once:true}});
 
   // generic rise-in
@@ -969,6 +980,24 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
   list.forEach(function(c){c.update(0)});
   if(reduce){list.forEach(function(c){c.visible=true;c.update(1.2)});leaders()}else requestAnimationFrame(loop);
   window.addEventListener('resize',leaders);
+})();
+</script>
+<script>
+/* role strip: drifts slowly, speeds up and leans when you scroll fast */
+(function(){
+  var el=document.getElementById('rb'),band=document.getElementById('roleband');if(!el)return;
+  var t='<span>Project Manager</span><b>&middot;</b><span>AI Delivery</span><b>&middot;</b><span>Technical PM</span><b>&middot;</b>';el.innerHTML=t+t+t;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,third=0,x=0,last=window.scrollY,vel=0,vis=false;
+  function measure(){third=el.scrollWidth/3;if(x===0)x=-third}
+  measure();window.addEventListener('resize',measure);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measure);
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(band);else vis=true;
+  if(reduce){el.style.transform='translateX('+(-third)+'px)';return}
+  (function loop(){
+    var d=window.scrollY-last;last=window.scrollY;vel+=(d-vel)*0.12;
+    if(vis){var boost=Math.min(Math.abs(vel),60),sg=vel<-0.4?-1:1;x+=-1*sg*(0.7+boost*0.5);if(x<=-third*2)x+=third;if(x>=0)x-=third;
+      el.style.transform='translateX('+x.toFixed(1)+'px) skewX('+(-vel*0.22).toFixed(2)+'deg)'}
+    requestAnimationFrame(loop);
+  })();
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
