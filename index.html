@@ -401,14 +401,6 @@ dialog::backdrop{background:rgba(8,10,18,.55);backdrop-filter:blur(6px)}
 @media(max-width:1100px){.sgrid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:640px){.sgrid{grid-template-columns:repeat(2,1fr)}.sk{padding:11px 10px 11px 14px}}
 
-/* custom cursor */
-html.has-cursor,html.has-cursor *{cursor:none!important}
-.cur-dot,.cur-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:99999;border-radius:50%;mix-blend-mode:difference;opacity:0;transition:opacity .3s}
-.cur-dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:#fff}
-.cur-ring{width:40px;height:40px;margin:-20px 0 0 -20px;border:1.5px solid #fff;transition:width .28s,height .28s,margin .28s,background .28s,opacity .3s}
-.cur-ring.hov{width:74px;height:74px;margin:-37px 0 0 -37px;background:#fff}
-.has-cursor .cur-dot,.has-cursor .cur-ring{opacity:1}
-
 /* nav: active section */
 .nav a.l{position:relative}
 .nav a.l.on{color:var(--blue)}
@@ -852,22 +844,6 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
       .to(tiles,{x:0,y:0,rotation:0,opacity:1,scale:1,ease:'power3.out',duration:1,stagger:{each:0.045,from:'random'}},0)
       .to({},{duration:0.45});
   }else{document.getElementById('spct').textContent='100%'}
-
-  // custom cursor: a dot at the pointer and a ring that follows it
-  if(window.matchMedia('(pointer:fine)').matches){
-    var dot=document.createElement('div'),ring=document.createElement('div');dot.className='cur-dot';ring.className='cur-ring';document.body.appendChild(dot);document.body.appendChild(ring);
-    var mx=-100,my=-100,rx=-100,ry=-100,on=false,dlgEl=document.getElementById('dlg');
-    window.addEventListener('mousemove',function(e){
-      mx=e.clientX;my=e.clientY;
-      var inDlg=dlgEl&&dlgEl.open;
-      if(!on&&!inDlg){on=true;root.classList.add('has-cursor')}
-      if(inDlg&&on){on=false;root.classList.remove('has-cursor')}
-      if(!inDlg&&!on){on=true;root.classList.add('has-cursor')}
-      ring.classList.toggle('hov',!!e.target.closest('a,button,.card,.cnode,.sk,.phase,.callout,[role=button]'));
-    },{passive:true});
-    document.addEventListener('mouseleave',function(){root.classList.remove('has-cursor');on=false});
-    gsap.ticker.add(function(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;dot.style.transform='translate('+mx+'px,'+my+'px)';ring.style.transform='translate('+rx+'px,'+ry+'px)'});
-  }
 
   // nav: highlight the section being read
   (function(){
