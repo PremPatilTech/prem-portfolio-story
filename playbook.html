@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project playbook | Prem Patil</title>
+<meta name="description" content="How Prem Patil runs a project from kickoff to handover: the plans, registers and routines, shown as sample artifacts.">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0f'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='white'%3EP%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Project playbook | Prem Patil">
+<meta property="og:description" content="The plans, registers and routines I use to run a project from kickoff to handover.">
+<meta property="og:image" content="https://premstory.netlify.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --ink:#0b0b0f; --mute:#5b6170; --line:#e6e8ee; --card:#f5f7fc;
+  --blue:#2563eb; --blue-soft:#e8efff; --shadow:0 18px 50px -20px rgba(37,99,235,.35);
+  --r:22px;
+}
+[data-theme="dark"]{
+  --bg:#0a0b10; --ink:#f3f5fa; --mute:#9aa3b5; --line:#21242e; --card:#12141b;
+  --blue:#6b95ff; --blue-soft:#16213d; --shadow:0 18px 50px -20px rgba(107,149,255,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{width:min(1180px,100% - 48px);margin-inline:auto}
+section{padding:clamp(80px,12vw,150px) 0;position:relative}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:18px}
+h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
+.big{font-size:clamp(34px,5.6vw,72px)}
+.lede{font-size:clamp(17px,1.5vw,20px);color:var(--mute);max-width:640px;margin-top:22px}
+.accent{color:var(--blue)}
+
+/* nav */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:6px;padding:8px 10px 8px 20px;border-radius:999px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 8px 30px -14px rgba(0,0,0,.25);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.nav.hero-on{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#fff}
+.nav.hero-on a.l{color:rgba(255,255,255,.78)}
+.nav.hero-on .cta{background:#fff;color:#0b0b0f}
+.nav.hero-on .theme{border-color:rgba(255,255,255,.25)}
+.nav.hide{transform:translate(-50%,-140%)}
+.nav .logo{font-weight:700;letter-spacing:-.02em;margin-right:14px;white-space:nowrap}
+.nav a.l{padding:8px 14px;border-radius:999px;font-size:14px;color:var(--mute);transition:.25s}
+.nav a.l:hover{background:var(--blue-soft);color:var(--blue)}
+.nav .cta{white-space:nowrap;background:var(--ink);color:var(--bg);padding:9px 18px;border-radius:999px;font-size:14px;font-weight:600;margin-left:4px;transition:.25s}
+.nav .cta:hover{background:var(--blue);color:#fff}
+.theme{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);margin-left:4px;transition:.25s}
+.theme:hover{background:var(--blue-soft)}
+.theme svg{width:18px;height:18px}
+.theme .moon{display:none}[data-theme="dark"] .theme .sun{display:none}[data-theme="dark"] .theme .moon{display:block}
+@media(max-width:820px){.nav a.l{display:none}.nav{padding-left:16px}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:140px 0 clamp(70px,10vh,120px);color:#fff;background:#050a1a;overflow:hidden}
+.hero-media{position:absolute;inset:0;overflow:hidden}
+.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);will-change:transform}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.6) 38%,rgba(5,5,5,.08) 68%,rgba(5,5,5,0) 100%),linear-gradient(180deg,rgba(5,5,5,.45) 0%,rgba(5,5,5,0) 30%,rgba(5,5,5,.7) 100%)}
+.hero .wrap{position:relative;z-index:2}
+.mono{font-family:'DM Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;font-size:12.5px;color:rgba(255,255,255,.78)}
+.hero h1{font-size:clamp(42px,7.2vw,112px);font-weight:500;letter-spacing:-.045em;line-height:1;margin:22px 0 0;max-width:1180px}
+.hero h1 .ln{display:block;overflow:hidden;padding:.04em 0 .12em}
+.hero h1 .wd{display:inline-block}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.02em;color:#ffffff}
+.hero .sub{margin-top:26px;font-size:clamp(17px,1.6vw,21px);color:rgba(255,255,255,.84);max-width:620px}
+.hero .sub b{color:#fff;font-weight:600}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .25s,box-shadow .25s,background .25s,border-color .25s,color .25s;will-change:transform}
+.btn.primary{background:var(--blue);color:#fff;box-shadow:var(--shadow)}
+.btn.primary:hover{box-shadow:0 22px 50px -16px rgba(37,99,235,.6)}
+.btn.ghost{border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--blue);color:var(--blue)}
+.hero .btn.ghost{border-color:rgba(255,255,255,.5);color:#fff}
+.hero .btn.ghost:hover{background:#fff;color:#0b0b0f;border-color:#fff}
+.hero .btn.primary{background:#fff;color:#0b0b0f;box-shadow:none}
+.hero .btn.primary:hover{background:#e9ebf2}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.hero :focus-visible{outline-color:#fff}
+.btn svg{width:18px;height:18px;transition:transform .25s}
+.btn:hover svg{transform:translateX(4px)}
+.scroll-hint{position:absolute;z-index:2;right:max(24px,calc((100% - 1180px)/2));bottom:46px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint i{width:1px;height:44px;background:linear-gradient(#fff,transparent);animation:drip 1.8s infinite}
+.legend{margin-top:34px;font-size:13px;color:rgba(255,255,255,.82);display:flex;align-items:center;gap:12px;max-width:560px;letter-spacing:.14em}
+.legend span{flex:none;width:26px;height:1px;background:rgba(255,255,255,.55)}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:700px){.scroll-hint{display:none}.hero-media video{object-position:78% center}.hero-media::after{background:linear-gradient(180deg,rgba(5,5,5,.5),rgba(5,5,5,.12) 38%,rgba(5,5,5,.9) 78%)}}
+/* about */
+.about{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,70px);align-items:center}
+.about img{width:clamp(150px,18vw,230px);aspect-ratio:1;border-radius:50%;object-fit:cover;border:1px solid var(--line);box-shadow:0 20px 50px -24px rgba(37,99,235,.45)}
+.about p{font-size:clamp(19px,2vw,26px);line-height:1.5;letter-spacing:-.015em;max-width:820px}
+.about p span{color:color-mix(in srgb,var(--ink) 78%,var(--bg))}
+.facts{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px;max-width:900px}
+.facts li{padding:16px 18px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.facts b{display:block;font-size:clamp(18px,1.8vw,24px);letter-spacing:-.02em}
+.facts span{display:block;font-size:13.5px;color:var(--mute);line-height:1.4;margin-top:4px}
+@media(max-width:860px){.facts{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.about{grid-template-columns:1fr}}
+
+/* artifacts */
+#artifacts{padding-top:clamp(70px,9vw,120px)}
+.cadence{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.cadence div{padding:20px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.cadence b{display:block;font-size:17px;letter-spacing:-.02em}
+.cadence span{display:block;margin-top:6px;color:var(--mute);font-size:14.5px;line-height:1.4}
+.art{margin-top:30px;border:1px solid var(--line);border-radius:24px;background:var(--bg);overflow:hidden;box-shadow:var(--shadow)}
+.art-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px;background:var(--card);border-bottom:1px solid var(--line)}
+.art-tabs button{padding:10px 16px;border-radius:999px;font-weight:600;font-size:14px;color:var(--mute);transition:.25s}
+.art-tabs button:hover{background:var(--blue-soft);color:var(--blue)}
+.art-tabs button.on{background:var(--ink);color:var(--bg)}
+.art-body{padding:18px}
+.art-panel{display:none}.art-panel.on{display:block}
+.scrollx{overflow-x:auto}
+.art table{border-collapse:collapse;width:100%;min-width:760px;font-size:13.5px}
+.art th{text-align:left;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.art td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}
+.art td.id{font-weight:700;color:var(--blue);white-space:nowrap}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;background:var(--blue-soft);color:var(--blue);white-space:nowrap}
+.pill.done{background:#e5f6ec;color:#17803d}.pill.prog{background:#fff2d9;color:#9a6200}.pill.plan{background:var(--card);color:var(--mute);border:1px solid var(--line)}
+[data-theme="dark"] .pill.done{background:#123423;color:#58d68d}[data-theme="dark"] .pill.prog{background:#3a2c0b;color:#f0b84a}
+.gantt{min-width:860px;display:grid;grid-template-columns:230px repeat(12,1fr);font-size:13px}
+.gantt .gh{padding:8px 6px;text-align:center;font-size:11px;letter-spacing:.06em;color:var(--mute);border-bottom:1px solid var(--line)}
+.gantt .gh.l{text-align:left;padding-left:10px}
+.gantt .sp{grid-column:2/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:0}
+.gantt .gm{grid-column:1/-1;padding:12px 10px 6px;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.gantt .gl{padding:9px 10px;border-bottom:1px solid var(--line);display:flex;gap:8px}
+.gantt .gl b{color:var(--mute);font-weight:600;min-width:46px}
+.gantt .gc{border-bottom:1px solid var(--line);border-left:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
+.gantt .bar{grid-row:auto;height:14px;margin:12px 0;border-radius:999px;background:var(--blue);align-self:center}
+.gantt .gh.now{color:var(--blue);font-weight:700}
+.gantt .bar.cont{background:linear-gradient(90deg,var(--blue),transparent);border-radius:999px 0 0 999px}
+.gantt .bar.done{background:#2f9e5f}.gantt .bar.prog{background:#e0a020}
+.pb-tease{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0 30px}
+.pb-tease a{display:block;padding:22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:.25s}
+.pb-tease a:hover{border-color:var(--blue);transform:translateY(-3px)}
+.pb-tease .n{font-family:"DM Mono",monospace;font-size:12px;color:var(--blue)}
+.pb-tease b{display:block;font-size:18px;letter-spacing:-.02em;margin:6px 0}
+.pb-tease span:last-child{color:var(--mute);font-size:14.5px;line-height:1.45}
+@media(max-width:900px){.pb-tease{grid-template-columns:1fr 1fr}}@media(max-width:520px){.pb-tease{grid-template-columns:1fr}}
+.art-note{padding:0 18px 18px;font-size:13px;color:var(--mute)}
+@media(max-width:900px){.cadence{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.cadence{grid-template-columns:1fr}}
+
+/* delivery story */
+.story{background:#050505;color:#fff;padding:0}
+.story-head{padding:clamp(80px,11vw,140px) 0 40px}
+.story-head .big{color:#fff}.story-head .lede{color:rgba(255,255,255,.72)}
+.story-head .accent{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:#fff}
+.story-stage{display:grid;gap:28px;width:min(1180px,100% - 48px);margin:0 auto;padding-bottom:90px}
+.sc{margin:0}.sc img,.sc video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px;display:block}
+.sc figcaption{padding:14px 4px;color:rgba(255,255,255,.85);font-size:clamp(17px,1.7vw,22px)}
+.sc figcaption .mono{margin-right:14px}
+.story-cap,.story-bar{display:none}
+.js .story-pin{position:relative;height:100svh;overflow:hidden}
+.js .story-stage{position:absolute;inset:0;display:block;width:auto;margin:0;padding:0}
+.js .sc{position:absolute;inset:0;opacity:0;will-change:opacity,transform}
+.js .sc img,.js .sc video{height:100%;border-radius:0;aspect-ratio:auto}
+.js .sc figcaption{display:none}
+.js .story-pin::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(5,5,5,.35),rgba(5,5,5,0) 30%,rgba(5,5,5,.78) 100%)}
+.js .story-cap{display:block;position:absolute;z-index:3;left:max(24px,calc((100% - 1180px)/2));right:24px;bottom:clamp(54px,11vh,120px)}
+.story-cap p{font-size:clamp(26px,4.2vw,58px);line-height:1.08;letter-spacing:-.035em;font-weight:500;max-width:900px;margin-top:14px;transition:opacity .5s,transform .5s}
+.story-cap p.out{opacity:0;transform:translateY(14px)}
+.js .story-bar{display:block;position:absolute;z-index:3;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.18)}
+.story-bar i{display:block;height:100%;width:0;background:#fff}
+
+/* how I think */
+.words{font-size:clamp(30px,4.4vw,60px);line-height:1.12;letter-spacing:-.03em;font-weight:700;max-width:1000px}
+.js .words .w{opacity:.14}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:70px;position:relative}
+.steps::before{content:"";position:absolute;left:0;right:0;top:-24px;height:2px;background:var(--line)}
+.steps .bar{position:absolute;left:0;top:-24px;height:2px;width:100%;background:var(--blue);transform-origin:left;transform:scaleX(1)}
+.js .steps .bar{transform:scaleX(0)}
+.step{padding:22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:transform .35s,box-shadow .35s,border-color .35s}
+.step:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--blue)}
+.step span{display:block;color:var(--blue);font-weight:700;font-size:14px;margin-bottom:26px}
+.step b{font-size:18px;letter-spacing:-.02em;line-height:1.2;display:block}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:60px}
+.card{position:relative;text-align:left;padding:34px;border-radius:28px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s;transform-style:preserve-3d;overflow:hidden}
+.card::after{content:"";position:absolute;inset:auto -40% -60% auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(var(--blue-soft),transparent 70%);opacity:0;transition:opacity .4s}
+.card:hover{box-shadow:var(--shadow);border-color:var(--blue)}
+.card:hover::after{opacity:1}
+.kpi-line{font-weight:700;font-size:15px;color:var(--blue);letter-spacing:-.01em}
+.card .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.card h3{font-size:clamp(26px,2.6vw,36px)}
+.card p{color:var(--mute);font-size:15.5px;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.card .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.card .meta span{font-size:12.5px;padding:6px 12px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
+.card .meta b{color:var(--blue)}
+.status{align-self:flex-start;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--blue-soft);color:var(--blue)}
+.card .open{margin-top:auto;padding-top:10px;font-weight:600;font-size:14.5px;display:flex;align-items:center;gap:8px;color:var(--blue)}
+.card .open svg{width:18px;height:18px;transition:transform .3s}
+.card:hover .open svg{transform:translate(4px,-4px)}
+.card.wide{grid-column:1/-1}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+
+/* modal */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%;color:var(--ink)}
+dialog::backdrop{background:rgba(8,10,18,.55);backdrop-filter:blur(6px)}
+.sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;outline:0;position:fixed;right:0;top:0;height:100%;width:min(720px,100%);background:var(--bg);overflow-y:auto;padding:44px clamp(22px,4vw,52px) 70px;border-left:1px solid var(--line);animation:slide .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes slide{from{transform:translateX(60px);opacity:0}to{transform:none;opacity:1}}
+.close{position:sticky;top:0;float:right;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:22px;transition:.25s}
+.close:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.sheet h2{font-size:clamp(34px,4.5vw,52px);margin:8px 0 10px}
+.sheet .role{color:var(--mute);margin-bottom:8px}
+.sheet h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:34px 0 10px}
+.sheet p{color:var(--mute);font-size:16px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.kpi{padding:18px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.kpi small{display:block;color:var(--mute);font-size:12px}
+.kpi b{font-size:20px;letter-spacing:-.02em}
+.stack{display:flex;flex-wrap:wrap;gap:8px}
+.stack span{padding:7px 14px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:13px;font-weight:500}
+
+/* results */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;border-top:1px solid var(--line)}
+.stat{padding:34px 24px 10px 0;border-right:1px solid var(--line);padding-left:24px}
+.stat:first-child{padding-left:0}.stat:last-child{border-right:0}
+.stat .n{font-size:clamp(46px,6vw,88px);font-weight:700;letter-spacing:-.05em;line-height:1;color:var(--ink)}
+.stat .n em{font-style:normal;color:var(--blue)}
+.stat p{margin-top:12px;color:var(--mute);font-size:15px}
+.foot{margin-top:28px;font-size:15px;color:color-mix(in srgb,var(--ink) 72%,var(--bg));max-width:680px}
+.regions{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.regions span.k{color:var(--mute);font-size:14px;margin-right:6px}
+.regions span.r{padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:14px;font-weight:500;transition:.25s}
+.regions span.r:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-3px)}
+@media(max-width:860px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.stat:nth-child(3){padding-left:0}}
+
+/* journey */
+.line{position:relative;margin-top:70px;padding-left:46px}
+.line::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.line .fill{position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--blue);transform-origin:top}
+.js .line .fill{transform:scaleY(0)}
+.node{position:relative;padding:0 0 56px}
+.node:last-child{padding-bottom:0}
+.node::before{content:"";position:absolute;left:-44px;top:8px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:2px solid var(--blue);transition:.3s}
+.node.on::before{background:var(--blue);box-shadow:0 0 0 7px var(--blue-soft)}
+.node small{color:var(--blue);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.node h3{font-size:clamp(24px,2.8vw,34px);margin:6px 0 10px}
+.node p{color:var(--mute);max-width:700px}
+.node.next h3{color:var(--blue)}
+
+/* skills */
+.grp{display:flex;align-items:center;gap:14px;font-size:clamp(20px,2vw,26px);letter-spacing:-.025em;margin:72px 0 22px}
+.grp span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-size:14px;font-weight:700}
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.phase{padding:22px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:transform .35s,box-shadow .35s,border-color .35s}
+.phase:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--blue)}
+.phase small{display:block;color:var(--blue);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.phase h4{font-size:19px;letter-spacing:-.02em;margin-bottom:14px;line-height:1.15}
+.phase ul{list-style:none;display:grid;gap:9px}
+.phase li{font-size:14.5px;color:var(--mute);padding-left:16px;position:relative;line-height:1.4}
+.phase li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.phase li b{color:var(--ink);font-weight:600}
+.chipset{display:flex;flex-wrap:wrap;gap:10px}
+.chipset span{padding:10px 18px;border-radius:999px;border:1px solid var(--line);font-size:14.5px;transition:.25s;background:var(--bg)}
+.chipset span:hover{background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-3px)}
+.toolgroups{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tg{padding:24px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.tg h4{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+.tg .list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tool{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--bg);border:1px solid var(--line);font-weight:500;font-size:14px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.tool:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:var(--shadow)}
+.ti{flex:none;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);color:#111;font-size:12px;font-weight:700;overflow:hidden}
+.ti svg{width:16px;height:16px}
+.ti.full{border:0;background:none}
+.ti.full svg{width:26px;height:26px}
+.tool small{display:block;font-size:10.5px;color:var(--mute);font-weight:500;line-height:1.1}
+@media(max-width:1000px){.phases{grid-template-columns:1fr 1fr}.toolgroups{grid-template-columns:1fr}}
+@media(max-width:560px){.phases{grid-template-columns:1fr}}
+
+/* contact */
+.close-sec{text-align:center}
+.close-sec h2{font-size:clamp(36px,6vw,84px);max-width:1000px;margin:0 auto}
+.close-sec .btns{justify-content:center;margin-top:44px}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--mute);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a:hover{color:var(--blue)}
+footer nav{display:flex;gap:22px}
+#top{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;opacity:0;pointer-events:none;transform:translateY(12px);transition:.3s;z-index:40}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+#top:hover{background:var(--blue);color:#fff}
+#top svg{width:20px;height:20px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* playbook page */
+.ph{padding:clamp(120px,16vw,190px) 0 40px}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.phases div{padding:20px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.phases .n{font-family:'DM Mono',monospace;font-size:12px;color:var(--blue);letter-spacing:.1em}
+.phases b{display:block;font-size:19px;letter-spacing:-.02em;margin:6px 0}
+.phases span{display:block;color:var(--mute);font-size:14.5px;line-height:1.45}
+.pb section,.pbs{padding:clamp(50px,7vw,90px) 0}
+.pbs h2{font-size:clamp(28px,3.6vw,46px);margin-bottom:6px}
+.art h3{font-size:17px;letter-spacing:-.02em;margin:26px 0 4px;line-height:1.2}
+.art h3:first-child{margin-top:4px}
+.art .sub{color:var(--mute);font-size:14px;margin-bottom:10px;max-width:760px}
+.kv{display:grid;grid-template-columns:200px 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px}
+.kv>div{padding:11px 14px;border-bottom:1px solid var(--line);line-height:1.45}
+.kv>div:nth-last-child(-n+2){border-bottom:0}
+.kv .k{font-weight:700;background:var(--card)}
+@media(max-width:640px){.kv{grid-template-columns:1fr}.kv .k{border-bottom:0;padding-bottom:2px}}
+.rag{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:6px 0 14px}
+.rag div{padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);font-size:13.5px;line-height:1.4}
+.rag b{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+.rag i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.rag .g i{background:#2f9e5f}.rag .a i{background:#e0a020}.rag .r i{background:#d6453d}
+@media(max-width:820px){.rag{grid-template-columns:1fr 1fr}.phases{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.rag,.phases{grid-template-columns:1fr}}
+.pill.hi{background:#fde8e6;color:#b3261e}.pill.md{background:#fff2d9;color:#9a6200}.pill.lo{background:#e5f6ec;color:#17803d}
+[data-theme="dark"] .pill.hi{background:#3d1815;color:#ff8a80}[data-theme="dark"] .pill.md{background:#3a2c0b;color:#f0b84a}[data-theme="dark"] .pill.lo{background:#123423;color:#58d68d}
+.cp{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;margin:4px 0 12px}
+.cp span{padding:5px 11px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-weight:600}
+.cp em{color:var(--mute);font-style:normal}
+.cov{width:100%;border-collapse:collapse;font-size:14px;margin-top:26px}
+.cov th{text-align:left;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:10px 12px;border-bottom:1px solid var(--line)}
+.cov td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+.cov td:first-child{font-weight:700;white-space:nowrap}
+.cov a{color:var(--blue);font-weight:600}
+.scrollx{overflow-x:auto}
+.ev{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+.ev a{display:block;padding:20px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:.25s}
+.ev a:hover{border-color:var(--blue);transform:translateY(-3px)}
+.ev b{display:block;font-size:16px;letter-spacing:-.02em}
+.ev span{display:block;margin-top:5px;color:var(--mute);font-size:14px;line-height:1.4}
+@media(max-width:900px){.ev{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ev{grid-template-columns:1fr}}
+.back{display:inline-flex;gap:8px;margin-bottom:22px;font-size:14px;font-weight:600;color:var(--blue)}
+footer{padding:40px 0;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer nav{display:flex;gap:18px}
+
+
+</style>
+</head>
+<body class="pb">
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a class="logo" href="index.html">Prem Patil</a>
+  <a class="l" href="index.html#projects">Projects</a>
+  <a class="l" href="#artifacts">Artifacts</a>
+  <a class="l" href="#evidence">Real docs</a>
+  <a class="cta" href="index.html#contact">Let's talk</a>
+  <button class="theme" id="theme" aria-label="Switch light and dark mode">
+    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+  </button>
+</nav>
+
+<header class="ph"><div class="wrap">
+  <a class="back" href="index.html">&larr; Back to portfolio</a>
+  <p class="eyebrow">Project playbook</p>
+  <h1 class="big">Five artifacts I run <span class="accent">every project on.</span></h1>
+  <p class="lede">Client plans are confidential, so these use made-up data. They show how I track a project, not a client&rsquo;s work. The client decides what to build and why. My job is to turn that into requirements and a plan, and deliver it.</p>
+</div></header>
+
+<section class="pbs" id="artifacts"><div class="wrap">
+  <div class="art">
+    <div class="art-tabs" role="tablist">
+      <button role="tab" class="on" data-t="a1">Roadmap</button>
+      <button role="tab" data-t="a2">Risks and dependencies</button>
+      <button role="tab" data-t="a3">Weekly status</button>
+      <button role="tab" data-t="a4">Decisions and trade-offs</button>
+      <button role="tab" data-t="a5">Requirements trace</button>
+    </div>
+    <div class="art-body">
+      <div class="art-panel on" id="p-a1">
+        <h3>Delivery roadmap</h3><p class="sub">Milestones and sprints on one view. The bars at the right edge continue into the next release.</p>
+        <div class="scrollx" id="ganttBox"></div>
+      </div>
+      <div class="art-panel" id="p-a2">
+        <h3>Risk and dependency register</h3><p class="sub">Reviewed every Friday. A risk scores probability &times; impact (each 1 to 5). Anything above 12 goes to the client that day.</p>
+        <div class="cp"><em>Critical path:</em><span>Requirements</span><em>&rarr;</em><span>Architecture</span><em>&rarr;</em><span>Core build</span><em>&rarr;</em><span>Automation</span><em>&rarr;</em><span>Testing</span><em>&rarr;</em><span>UAT</span></div>
+        <div class="scrollx"><div id="riskBox"></div></div>
+      </div>
+      <div class="art-panel" id="p-a3">
+        <h3>Weekly status report (sent every Friday)</h3><p class="sub">Four ratings, then what the client needs to know.</p>
+        <div class="rag">
+          <div class="g"><b><i></i>Scope</b>No change this week. One change request pending.</div>
+          <div class="a"><b><i></i>Schedule</b>Integrations one week behind. Recovery plan agreed.</div>
+          <div class="g"><b><i></i>Effort</b>74% of planned effort used at 70% of the plan.</div>
+          <div class="a"><b><i></i>Risk</b>Two risks above 12. Both have owners and dates.</div>
+        </div>
+        <div class="kv">
+          <div class="k">Done this week</div><div>Core build 60% complete. Admin view demoed. Requirements trace updated.</div>
+          <div class="k">Next week</div><div>Finish integrations. Start workflow automation. Review the regression test plan.</div>
+          <div class="k">Needs from client</div><div>API credentials for the email provider by Tuesday. Decision on change request CR-02.</div>
+        </div>
+      </div>
+      <div class="art-panel" id="p-a4">
+        <h3>Decision and trade-off log</h3><p class="sub">When scope, time and quality pull against each other, the options go to the client in writing, and the decision is recorded once.</p>
+        <div class="scrollx"><div id="decBox"></div></div>
+      </div>
+      <div class="art-panel" id="p-a5">
+        <h3>Requirements traceability matrix</h3><p class="sub">Each requirement is traced to design, build and test, so nothing is built without a reason and nothing is left untested.</p>
+        <div class="scrollx"><div id="rtmBox"></div></div>
+      </div>
+    </div>
+    <p class="art-note">Sample project, illustrative data only. I also keep a communication plan, a change log, a test and UAT plan and a handover pack on real projects.</p>
+  </div>
+</div></section>
+
+<section class="pbs" id="evidence"><div class="wrap">
+  <p class="eyebrow">Real documents</p>
+  <h2>The same method, in public.</h2>
+  <p class="lede">My personal project <b>Hermes Trading OS</b> is documented in the open on GitHub: the full set of documents a delivery team would produce. The trading strategy itself is not published.</p>
+  <div class="ev">
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/blob/main/docs/02-prd.md" target="_blank" rel="noopener"><b>Product requirements (PRD)</b><span>Goals, non-goals, users, functional requirements.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/blob/main/docs/04-system-architecture.md" target="_blank" rel="noopener"><b>System architecture</b><span>Components, boundaries and data flow.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/blob/main/docs/06-risk-governance.md" target="_blank" rel="noopener"><b>Risk rules</b><span>Fail-closed rules and who owns each risk.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/tree/main/docs/adr" target="_blank" rel="noopener"><b>Decision records (ADRs)</b><span>Four architecture decisions with reasons.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/blob/main/docs/08-test-strategy.md" target="_blank" rel="noopener"><b>Test strategy</b><span>What is tested, how, and the pass criteria.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/blob/main/docs/09-uat-plan.md" target="_blank" rel="noopener"><b>UAT plan</b><span>Acceptance scenarios and sign-off.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/blob/main/docs/traceability-matrix.md" target="_blank" rel="noopener"><b>Traceability matrix</b><span>Requirement to design to test.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS/blob/main/docs/11-roadmap.md" target="_blank" rel="noopener"><b>Roadmap</b><span>Phases and the 100-trade review gate.</span></a>
+    <a href="https://github.com/PremPatilTech/Hermes-Trading-OS" target="_blank" rel="noopener"><b>Whole repository</b><span>README, docs, examples and portfolio notice.</span></a>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <span><b>Prem Patil</b> &middot; Project Manager &middot; Mumbai</span>
+    <nav><a href="index.html">Portfolio</a><a href="mailto:prempatil140398@gmail.com">Email</a><a href="https://www.linkedin.com/in/prem-patil143" target="_blank" rel="noopener">LinkedIn</a></nav>
+  </div>
+</footer>
+
+<script>
+var root=document.documentElement,themeBtn=document.getElementById('theme');
+try{var saved=localStorage.getItem('theme');if(saved)root.setAttribute('data-theme',saved)}catch(e){}
+themeBtn.addEventListener('click',function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}});
+
+function tbl(head,rows,fn){
+  return '<table><thead><tr>'+head.map(function(h){return '<th>'+h+'</th>'}).join('')+'</tr></thead><tbody>'+rows.map(function(r,i){
+    return '<tr>'+r.map(function(c,j){var v=fn?fn(c,j,r):c;return '<td'+(j===0?' class="id"':'')+'>'+v+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table>';
+}
+function pill(t,c){return '<span class="pill '+c+'">'+t+'</span>'}
+function put(id,h){var e=document.getElementById(id);if(e)e.innerHTML=h}
+var done=function(t){return pill(t,t==='Passed'||t==='Delivered'||t==='Approved'||t==='Done'||t==='Closed'||t==='Agreed'?'done':(t==='In test'||t==='In progress'||t==='At risk'||t==='Open'||t==='Pending'?'prog':'plan'))};
+
+
+put('rtmBox',tbl(['Req ID','Requirement','Priority','Design ref','Build task','Test case','UAT'],[
+ ['FR-01','User submits a request through the web form','High','DES-01','M2-01','TC-01, TC-02','Passed'],
+ ['FR-02','Request is stored and visible to the admin team','High','DES-02','M2-01','TC-03','Passed'],
+ ['FR-03','Automated workflow routes the request to the right owner','High','DES-04','M2-03','TC-05, TC-06','In test'],
+ ['FR-04','Status updates reach the client by email','Medium','DES-05','M2-02','TC-07','In test'],
+ ['NFR-01','Role-based access to client data','High','DES-03','M2-01','TC-09','Planned'],
+ ['NFR-02','Daily backup of all stored data','Medium','DES-06','M2-02','TC-10','Planned']],
+ function(c,j){return j===6?done(c):c}));
+
+/* ---- phase 2: roadmap ---- */
+(function(){
+  var box=document.getElementById('ganttBox');
+  var T=[['M','Milestone 1: Discovery and foundation'],
+   ['M1-01','Kickoff and success criteria','PM + BA',1,1,'done'],
+   ['M1-02','Current-state workflow discovery','BA',1,2,'done'],
+   ['M1-03','Requirements and RTM','PM + BA',2,3,'done'],
+   ['M1-04','Data and integration readiness','Tech Lead + Engineer',2,3,'done'],
+   ['M1-05','Architecture and guardrails','Tech Lead',3,4,'done'],
+   ['M1-06','Roadmap and sprint plan sign-off','PM',4,4,'done'],
+   ['M','Milestone 2: Build'],
+   ['M2-01','Core platform build','Engineers',5,8,'prog'],
+   ['M2-02','Integrations','Engineer',6,8,'prog'],
+   ['M2-03','Workflow automation build','Engineer',7,9,'plan'],
+   ['M','Milestone 3: Test and release'],
+   ['M3-01','Integration testing','QA',9,10,'plan'],
+   ['M3-02','Regression testing','QA',10,11,'plan'],
+   ['M3-03','UAT with the client','PM + QA',11,12,'plan cont'],
+   ['M3-04','Next release planning','PM',12,12,'plan cont']];
+  var g='<div class="gantt"><div class="gh l">TASK</div>';
+  for(var w=1;w<=12;w++)g+='<div class="gh'+(w===6?' now':'')+'">'+(w===6?'W6 &middot; today':'W'+w)+'</div>';
+  g+='<div class="gh l">SPRINT</div><div class="gh" style="grid-column:2/6">Sprint 1: discovery</div><div class="gh" style="grid-column:6/10">Sprint 2: core build</div><div class="gh" style="grid-column:10/12">Sprint 3: testing</div><div class="gh" style="grid-column:12/14">Sprint 4+: UAT and next release</div>';
+  T.forEach(function(r){
+    if(r[0]==='M'){g+='<div class="gm">'+r[1]+'</div>';return}
+    g+='<div class="gl"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>';
+    for(var c=1;c<=12;c++){
+      if(c===r[3]){g+='<div class="gc" style="grid-column:'+(c+1)+'/'+(r[4]+2)+'"><div class="bar '+r[5]+'" style="margin:12px 4px"></div></div>';c=r[4]}
+      else g+='<div class="gc"></div>';
+    }
+  });
+  box.innerHTML=g+'</div>';
+})();
+
+var sc=function(s){return pill(s,s>=15?'hi':(s>=8?'md':'lo'))};
+put('riskBox',tbl(['ID','Type','Item','Owner','Score / needed by','Response','Status'],[
+ ['R-01','Risk','Client API access arrives late','PM','16','Sandbox account first, weekly chase. Trigger: no credentials by W4 Friday','Open'],
+ ['D-01','Dependency','API credentials for the client email provider','Client IT','W5','Blocks M2-02. If late, use a sandbox and swap in later','At risk'],
+ ['R-02','Risk','Requirements grow after sign-off','PM','12','Change request log, reviewed on Fridays','Open'],
+ ['R-03','Risk','Key engineer unavailable','Tech Lead','10','Pair on core modules, document as we go','Open'],
+ ['D-02','Dependency','Third-party chat API rate limits confirmed','Engineer','W7','Queue messages, retry with back-off','Open'],
+ ['R-04','Risk','Client reviewers not available for UAT','PM','12','Book sessions early. Trigger: not accepted by W9','Open'],
+ ['D-03','Dependency','Signed-off requirements','PM','W3','Blocked M1-05 and M2-01. Now cleared','Done']],
+ function(c,j,r){if(j===4&&r[1]==='Risk')return sc(+c);if(j===6)return done(c);return c}));
+put('decBox',tbl(['ID','Situation','Options','Decision and why','Decided by'],[
+ ['TO-01','Integrations running one week late','A: cut the chat integration from this release. B: add one week and move UAT','A. Protects the go-live date; chat moves to the next release','Client sponsor, W7'],
+ ['TO-02','Client asks for SMS alerts mid-sprint (CR-02)','A: add now, +1 week and +40 hours. B: next release','B. No effect on the date; logged as a change request','Client sponsor, W6'],
+ ['DEC-02','Which screens to build first','A: full UI at the end. B: admin view first, polish later','B. Client sees real progress from sprint 2','PM + client, W3'],
+ ['DEC-04','Mobile view','A: add one sprint. B: defer to the next release','B. Protects the date; low expected usage','Client sponsor, W6']]));
+
+[].forEach.call(document.querySelectorAll('.art-tabs button'),function(b){b.addEventListener('click',function(){
+  var t=b.getAttribute('data-t');
+  [].forEach.call(document.querySelectorAll('.art-tabs button'),function(x){x.classList.toggle('on',x===b)});
+  [].forEach.call(document.querySelectorAll('.art-panel'),function(x){x.classList.toggle('on',x.id==='p-'+t)});
+})});
+</script>
+</body>
+</html>
