@@ -26,7 +26,7 @@
   --blue:#6b95ff; --blue-soft:#16213d; --shadow:0 18px 50px -20px rgba(107,149,255,.35);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:auto}
+html{scroll-behavior:auto;overflow-x:clip}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;overflow-x:hidden}
@@ -226,6 +226,32 @@ html.ld-lock,html.ld-lock body{overflow:hidden}
 /* closing statement fills as you scroll */
 #contact h2 .w{display:inline-block;white-space:pre;color:color-mix(in srgb,#f1f6ff calc(var(--t,1)*100%),#2b3756)}
 #contact h2 .accent .w{color:color-mix(in srgb,#8fbaff calc(var(--t,1)*100%),#27365a)}
+
+
+/* mobile hardening */
+.sstage,.sgrid,.rstage,.cons{overflow-x:clip}
+@media(max-width:760px){
+  section{padding-top:64px;padding-bottom:64px}
+  .card{padding:22px 20px;border-radius:22px;gap:10px}
+  .card h3{font-size:26px;line-height:1.1}
+  .card p{font-size:15px;line-height:1.5}
+  .card .meta{gap:6px}.card .meta span{font-size:12.5px;padding:5px 10px}
+  .kpi-line{font-size:14px;line-height:1.3}
+  .grid{gap:16px;margin-top:36px}
+  .sgrid{gap:8px}
+  .sk{min-height:58px;padding:10px 10px 10px 14px;gap:8px}
+  .skt small{font-size:10.5px;letter-spacing:.06em}
+  .skt b{font-size:13.5px;overflow-wrap:anywhere;hyphens:auto}
+  .sk .ti{flex:none}
+  .shead{margin-bottom:12px}
+  .slegend{font-size:11px;gap:6px}.slegend i{margin-left:8px}
+  .ccrystal{width:128px;height:128px;margin-bottom:14px}
+  #contact h2{font-size:clamp(30px,9.2vw,44px);line-height:1.08}
+  .close-sec .btns{margin-top:28px;gap:10px}
+  .cadence div{padding:16px}
+  .callout .n{font-size:48px}
+  #about,#results{border-radius:22px 22px 0 0;margin-top:-22px}
+}
 
 /* network hero */
 #hero{position:relative;height:440vh;background:#05070b;color:#f1f6ff}
@@ -557,7 +583,7 @@ footer nav{display:flex;gap:22px}
       <div><b>Every day</b><span>Written update: done, next, blocked</span></div>
       <div><b>Every Friday</b><span>Risk and dependency review, then the sprint meeting with the client</span></div>
       <div><b>Same day</b><span>Minutes sent, with an owner and date on every action</span></div>
-      <div><b>Every Friday</b><span>Weekly status: scope, schedule, effort and risk ratings</span></div>
+      <div><b>Weekly</b><span>Status report: scope, schedule, effort and risk ratings</span></div>
     </div>
 
     <div class="pb-tease" data-rise>
@@ -806,6 +832,7 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!window.gsap||!window.ScrollTrigger){return}
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ignoreMobileResize:true});
   root.classList.add('js');
 
   // smooth scroll
@@ -840,15 +867,15 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
   // process line fills as you scroll, steps rise
   (function(){var bar=document.querySelector('#steps .bar'),sts=[].slice.call(document.querySelectorAll('#steps .step'));
     ScrollTrigger.create({trigger:'#steps',start:'top 80%',end:'top 40%',scrub:true,onUpdate:function(self){bar.style.transform='scaleX('+self.progress+')';sts.forEach(function(el,i){el.classList.toggle('on',self.progress>=i/4-0.001)})}});})();
-  gsap.from('.step',{opacity:0,duration:.6,stagger:.08,ease:'power2.out',clearProps:'opacity,transform',scrollTrigger:{trigger:'#steps',start:'top 88%',once:true}});
+  gsap.from('.step',{opacity:0,duration:.6,stagger:.08,ease:'power2.out',clearProps:'opacity,transform',scrollTrigger:{trigger:'#steps',start:'top 88%',end:'max',once:true}});
 
   // generic rise-in
-  ScrollTrigger.batch('[data-rise]',{start:'top 90%',once:true,onEnter:function(b){gsap.from(b,{y:46,opacity:0,duration:.85,ease:'power3.out',stagger:.12,clearProps:'transform,opacity'})}});
+  ScrollTrigger.batch('[data-rise]',{start:'top 90%',end:'max',once:true,onEnter:function(b){gsap.from(b,{y:46,opacity:0,duration:.85,ease:'power3.out',stagger:.12,clearProps:'transform,opacity'})}});
 
   // counters
   document.querySelectorAll('[data-count]').forEach(function(el){
     var end=+el.getAttribute('data-count'),o={v:0};
-    ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:function(){
+    ScrollTrigger.create({trigger:el,start:'top 90%',end:'max',once:true,onEnter:function(){
       gsap.to(o,{v:end,duration:1.8,ease:'power2.out',onUpdate:function(){el.textContent=Math.round(o.v).toLocaleString('en-US')}});
     }});
   });
@@ -1057,8 +1084,8 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
   if(!window.gsap||!window.ScrollTrigger||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   /* the section before a sheet sinks back as the next one comes over it */
   function sink(sel,trig,start,end){var el=document.querySelector(sel);if(!el)return;gsap.to(el,{scale:0.94,opacity:0.5,transformOrigin:'50% 100%',ease:'none',scrollTrigger:{trigger:trig,start:start,end:end,scrub:true}})}
-  sink('#artifacts .wrap','#results','top bottom','top 25%');
-  sink('#results .wrap','#journey','top bottom','top top');
+  if(window.innerWidth>=900){sink('#artifacts .wrap','#results','top bottom','top 25%');
+  sink('#results .wrap','#journey','top bottom','top top');}
 
   /* a thread through the project cards */
   var grid=document.getElementById('grid');
@@ -1093,9 +1120,13 @@ document.getElementById('top').addEventListener('click',function(){window.scroll
     h.innerHTML=out.join('');
     var ws=[].slice.call(h.querySelectorAll('[data-w]')),n=ws.length;
     ws.forEach(function(w){w.style.setProperty('--t','0')});
-    ScrollTrigger.create({trigger:'#contact .wrap',start:'center center',end:'+=130%',pin:true,scrub:true,onUpdate:function(sc){
+    var big=window.innerWidth>=900;
+    ScrollTrigger.create(big?{trigger:'#contact .wrap',start:'center center',end:'+=130%',pin:true,scrub:true,onUpdate:function(sc){
       var pr=Math.min(1,sc.progress/0.75);
-      ws.forEach(function(w,i){var a=i/n,b=(i+1)/n,t=Math.max(0,Math.min(1,(pr-a)/(b-a+0.12)));w.style.setProperty('--t',t.toFixed(3))});
+      ws.forEach(function(w,i){var t=Math.max(0,Math.min(1,(pr*1.18-i/n)/0.18));w.style.setProperty('--t',t.toFixed(3))});
+    }}:{trigger:h,start:'top 88%',end:'bottom 58%',scrub:true,onUpdate:function(sc){
+      var pr=Math.min(1,sc.progress);
+      ws.forEach(function(w,i){var t=Math.max(0,Math.min(1,(pr*1.18-i/n)/0.18));w.style.setProperty('--t',t.toFixed(3))});
     }});
   }
 })();
@@ -1328,8 +1359,11 @@ function cands(kind,pr,w,h){
 }
 function putLabel(el,ax,ay,kind,pr,op,ignoreCap){
   if(op<0.03){el.style.opacity='0';return}
-  var w=el._w||(el._w=el.offsetWidth||110),h=el._h||(el._h=el.offsetHeight||30),cs=cands(kind,pr,w,h),ok=null;
-  for(var i=0;i<cs.length&&!ok;i++){
+  var w=el._w||(el._w=el.offsetWidth||110),h=el._h||(el._h=el.offsetHeight||30),cs=cands(kind,pr,w,h),ok=null,seq=[],ci=el._ci;
+  if(ci!==undefined&&el._ck===kind&&ci<cs.length)seq.push(ci);
+  for(var q=0;q<cs.length;q++)if(q!==ci||el._ck!==kind)seq.push(q);
+  for(var qi=0;qi<seq.length&&!ok;qi++){
+    var i=seq[qi];
     var rc={x:ax+cs[i][0],y:ay+cs[i][1],w:w,h:h};
     if(rc.x<8||rc.y<8||rc.x+w>innerWidth-8||rc.y+h>innerHeight-8)continue;
     var bad=false,k;
@@ -1337,7 +1371,7 @@ function putLabel(el,ax,ay,kind,pr,op,ignoreCap){
     if(!bad&&!ignoreCap&&capRect.w&&hit(rc,capRect))bad=true;
     for(k=0;k<placedR.length&&!bad;k++)if(hit(rc,placedR[k]))bad=true;
     for(k=0;k<circles.length&&!bad;k++)if(circHit(rc,circles[k]))bad=true;
-    if(!bad)ok=rc;
+    if(!bad){ok=rc;el._ci=i;el._ck=kind}
   }
   if(!ok){el.style.opacity='0';return}
   placedR.push({x:ok.x-4,y:ok.y-4,w:ok.w+8,h:ok.h+8});
@@ -1386,6 +1420,32 @@ function frame(){
   hint.style.opacity=p>0.03?0:1;
   idEl.style.opacity=p>0.9?0:1;
 
+  if(port&&w<0.4){
+    /* phone: one steady readout at the top-centre instead of labels chasing the crystals */
+    var hy=innerHeight*0.30,bm=0,bd=9;
+    for(var mm=0;mm<mLabels.length;mm++){var dd=Math.abs(MILE[mm][1]-tc);if(dd<bd){bd=dd;bm=mm}}
+    var l7s=mLabels[7],st7s=tc<0.66?0:(tc<0.80?1:2);
+    if(st7s!==l7s._st){l7s._st=st7s;l7s.className='lab '+(st7s===1?'risk':(st7s===2?'ok':''));l7s.innerHTML=st7s===1?'RISK &middot; API_ACCESS':(st7s===2?'API_ACCESS &middot; RE-ROUTED':'API_ACCESS');l7s._w=0}
+    var mh=34;
+    mLabels.forEach(function(el,mi){
+      if(mi!==bm){el.style.opacity='0';return}
+      var wd=el._w||(el._w=el.offsetWidth||110);mh=el._h||(el._h=el.offsetHeight||34);
+      el.style.opacity=Math.max(0,1-sm(bd,0.05,0.09)).toFixed(2);
+      el.style.transform='translate('+((innerWidth-wd)/2).toFixed(1)+'px,'+hy.toFixed(1)+'px)';
+    });
+    var bi=-1,bo=0.04;
+    for(var dj=0;dj<dLabels.length;dj++){var od2=(1-sm(Math.abs(feat[dj].t-tc),0.04,0.11))*sm(p,0.14,0.24);if(od2>bo){bo=od2;bi=dj}}
+    var shown=false;
+    dLabels.forEach(function(el,dj){
+      if(dj!==bi){el.style.opacity='0';return}
+      var wd=el._w||(el._w=el.offsetWidth||180);shown=true;
+      el.style.opacity=Math.min(1,bo*1.6).toFixed(2);
+      el.style.transform='translate('+((innerWidth-wd)/2).toFixed(1)+'px,'+(hy+mh+10).toFixed(1)+'px)';
+    });
+    var fo=sm(uDetour.value,0.7,1.0)*(1-sm(w,0,0.12)),fw=fixLabel._w||(fixLabel._w=fixLabel.offsetWidth||180);
+    fixLabel.style.opacity=(shown?0:fo).toFixed(2);
+    fixLabel.style.transform='translate('+((innerWidth-fw)/2).toFixed(1)+'px,'+(hy+mh+10).toFixed(1)+'px)';
+  }else{
   /* label layout: no label may touch a crystal, the caption, the nav or another label */
   var F=innerHeight*0.5/Math.tan(camera.fov*Math.PI/360);
   obst=[{x:0,y:0,w:innerWidth,h:72},{x:innerWidth-120,y:0,w:120,h:innerHeight},{x:0,y:72,w:380,h:44}];
@@ -1417,6 +1477,7 @@ function frame(){
     putLabel(mLabels[m],c.x,c.y,(w>0.4&&!port)?'row':'node',c.r,Math.max(op,ov),m===7);
   });
   putLabel(fixLabel,proj(fixPos).x,proj(fixPos).y,'fix',4,sm(uDetour.value,0.7,1.0)*(1-sm(w,0,0.12)),true);
+  }
   if(!staticMode)requestAnimationFrame(frame);
 }
 frame();
